@@ -1,3 +1,4 @@
+import 'mithril';
 import HelloWorld from './components/HelloWorld.jsx';
 import TodoApp from './components/TodoApp.jsx';
 
