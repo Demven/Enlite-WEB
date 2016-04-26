@@ -1,10 +1,18 @@
 var gulp = require('gulp');
+var del = require("del");
 var source = require('vinyl-source-stream');
 var babel = require('gulp-babel');
 var htmlMin = require('gulp-htmlmin');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var runSequence = require('run-sequence').use(gulp);
+var stylus = require('gulp-stylus');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+
+gulp.task('build:clean', function (cb) {
+    return del(['build'], cb);
+});
 
 gulp.task('build:html', function () {
     return gulp.src(['src/html/**'])
@@ -13,6 +21,15 @@ gulp.task('build:html', function () {
             removeComments: true
         }))
         .pipe(gulp.dest("build/html"));
+});
+
+gulp.task('build:css', function () {
+    return gulp.src("src/styles/**/*.styl")
+        .pipe(stylus({
+            compress: true,
+        }))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest("build/css"));
 });
 
 gulp.task('build:jsx', function() {
@@ -30,7 +47,7 @@ gulp.task('build:server-js', function () {
 });
 
 gulp.task('build', function (callback) {
-    runSequence('build:html', 'build:jsx', 'build:server-js', callback);
+    runSequence('build:clean', 'build:html', 'build:css', 'build:jsx', 'build:server-js', callback);
 });
 
 gulp.task('default', function (callback) {

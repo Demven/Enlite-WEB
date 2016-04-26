@@ -22,7 +22,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(compression());
-/*app.use(require("method-override")());*/
 
 
 // Routes
