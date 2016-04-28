@@ -1,3 +1,4 @@
+import m from 'mithril';
 import Unloadable from '../util/Unloadable';
 import TodoItem from '../model/TodoItem';
 import _Footer from './Footer.jsx';

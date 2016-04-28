@@ -26,7 +26,7 @@ app.use(compression());
 
 // Routes
 app.get("/", authenticate('enlite', 'enlite2016'), function(req, res) {
-    res.sendFile(path.join(__dirname, '../html', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
 });
 
 app.listen(app.get("port"));

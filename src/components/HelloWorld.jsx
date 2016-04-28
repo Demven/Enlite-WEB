@@ -1,3 +1,4 @@
+import m from 'mithril';
 import _Footer from './Footer.jsx';
 
 class HelloWorld {

@@ -1,3 +1,5 @@
+import m from 'mithril';
+
 class Footer {
     view() {
         return (

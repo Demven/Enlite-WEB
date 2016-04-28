@@ -9,10 +9,12 @@ var runSequence = require('run-sequence').use(gulp);
 var stylus = require('gulp-stylus');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var concatCss = require('gulp-concat-css');
+
 
 gulp.task('build:clean', function (cb) {
     return del(['build'], cb);
-});
+}); 
 
 gulp.task('build:html', function () {
     return gulp.src(['src/html/**'])
@@ -24,12 +26,13 @@ gulp.task('build:html', function () {
 });
 
 gulp.task('build:css', function () {
-    return gulp.src("src/styles/**/*.styl")
+    return gulp.src('src/styles/**/*.styl')
         .pipe(stylus({
             compress: true,
         }))
         .pipe(autoprefixer())
-        .pipe(gulp.dest("build/css"));
+        .pipe(concatCss('bundle.css'))
+        .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('build:jsx', function() {
