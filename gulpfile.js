@@ -12,6 +12,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var concatCss = require('gulp-concat-css');
 var rev = require('gulp-rev');
 var revReplace = require("gulp-rev-replace");
+var gzip = require('gulp-gzip');
 
 /* BUILD TASKS */
 gulp.task('build:clean', function (cb) {
@@ -87,9 +88,28 @@ gulp.task('rev', function (callback) {
 });
 
 
+/* GZIP */
+// css
+gulp.task('gzip:css', function() {
+    return gulp.src('build/css/bundle-*.css')
+        .pipe(gzip())
+        .pipe(gulp.dest('build/css'));
+});
+// js
+gulp.task('gzip:js', function() {
+    return gulp.src('build/js/bundle-*.js')
+        .pipe(gzip())
+        .pipe(gulp.dest('build/js'));
+});
+// main
+gulp.task('gzip', function (callback) {
+    runSequence('gzip:css', 'gzip:js', callback);
+});
+
+
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-    runSequence('build:clean', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', callback);
+    runSequence('build:clean', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
 });
 
 gulp.task('default', function (callback) {
