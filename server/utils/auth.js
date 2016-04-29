@@ -11,14 +11,14 @@ import basicAuth from 'basic-auth';
  * @returns {function} Express 4 middleware requiring the given credentials
  */
 export default function authenticate(username, password) {
-    return function(req, res, next) {
-        const user = basicAuth(req);
+  return function (req, res, next) {
+    const user = basicAuth(req);
 
-        if (!user || user.name !== username || user.pass !== password) {
-            res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-            return res.sendStatus(401);
-        }
+    if (!user || user.name !== username || user.pass !== password) {
+      res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+      return res.sendStatus(401);
+    }
 
-        next();
-    };
-};
+    next();
+  };
+}
