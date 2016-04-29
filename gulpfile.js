@@ -25,6 +25,12 @@ gulp.task('build:images', function () {
     .pipe(gulp.dest('build/images'));
 });
 
+// fonts
+gulp.task('build:fonts', function () {
+  return gulp.src('src/fonts/**')
+    .pipe(gulp.dest('build/fonts'));
+});
+
 // html
 gulp.task('build:html', function () {
   return gulp.src(['src/html/**'])
@@ -46,7 +52,7 @@ gulp.task('build:css', function () {
     .pipe(gulp.dest('build/css'));
 });
 gulp.task('build:jsx', function () {
-  return browserify(['./src/index.jsx'], {debug: true})
+  return browserify(['./src/js/index.jsx'], {debug: true})
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
@@ -116,12 +122,47 @@ gulp.task('gzip', function (callback) {
   runSequence('gzip:css', 'gzip:js', callback);
 });
 
+/* WATCH */
+gulp.task('watch', function () {
+  // css
+  gulp.watch('src/styles/**', function () {
+    runSequence('build:css', 'rev:css:manifest', 'rev:css:replace');
+  });
+  gulp.watch('src/components/**/*.styl', function () {
+    runSequence('build:css', 'rev:css:manifest', 'rev:css:replace');
+  });
+
+  // js
+  gulp.watch('src/components/**/*.jsx', function () {
+    runSequence('build:jsx', 'rev:js:manifest', 'rev:js:replace');
+  });
+  gulp.watch('src/js/**', function () {
+    runSequence('build:jsx', 'rev:js:manifest', 'rev:js:replace');
+  });
+  gulp.watch('server/**', function () {
+    runSequence('build:server-js');
+  });
+
+  // images
+  gulp.watch('src/images/**', function () {
+    runSequence('build:images');
+  });
+});
+
 
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-  runSequence('build:clean', 'build:images', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
+  runSequence('build:clean', 'build:images', 'build:fonts', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
+});
+
+gulp.task('dev', function (callback) {
+  runSequence('build', 'watch', callback);
+});
+
+gulp.task('production', function (callback) {
+  runSequence('build', callback);
 });
 
 gulp.task('default', function (callback) {
-  runSequence('build', callback);
+  runSequence('production', callback);
 });
