@@ -11,6 +11,7 @@ class HelloWorld {
     const Footer = new _Footer();
     return (
       <div className="HelloWorld">
+        <img className="HelloWorld__logo" src="/images/mithriljs-logo.png" alt="mithril.js logotype" />
         <h1 className="HelloWorld__title">{this.title()}</h1>
         <h3 className="HelloWorld__subtitle">{this.subtitle()}</h3>
         <Footer />

@@ -18,6 +18,14 @@ var gzip = require('gulp-gzip');
 gulp.task('build:clean', function (cb) {
   return del(['build'], cb);
 });
+
+// images
+gulp.task('build:images', function () {
+  return gulp.src('src/images/**')
+    .pipe(gulp.dest('build/images'));
+});
+
+// html
 gulp.task('build:html', function () {
   return gulp.src(['src/html/**'])
     .pipe(htmlMin({
@@ -26,6 +34,8 @@ gulp.task('build:html', function () {
     }))
     .pipe(gulp.dest("build/html"));
 });
+
+// css
 gulp.task('build:css', function () {
   return gulp.src('src/styles/enlite.styl')
     .pipe(stylus({
@@ -109,7 +119,7 @@ gulp.task('gzip', function (callback) {
 
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-  runSequence('build:clean', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
+  runSequence('build:clean', 'build:images', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
 });
 
 gulp.task('default', function (callback) {

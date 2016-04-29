@@ -43,7 +43,7 @@ class TodoApp extends Unloadable {
     }
   }
 
-  onMount(element, isInit, /* context*/) {
+  onMount(element, isInit) {
     if (!isInit) {
       console.log('onMount', element);
     }
@@ -70,7 +70,7 @@ class TodoApp extends Unloadable {
         </div>
 
         <table className="TodoApp__list">
-          {this.list.map((task, /* index*/) => {
+          {this.list.map((task) => {
             return (
               <tr>
                 <td>
