@@ -4,7 +4,9 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import render from 'mithril-node-render';
 import authenticate from './utils/auth';
+import TodoApp from './components/TodoApp/TodoApp';
 
 const app = express();
 
@@ -25,8 +27,32 @@ app.use(compression());
 
 
 // Routes
-app.get('/', authenticate('enlite', 'enlite2016'), (req, res) => {
+/*app.get('/', authenticate('enlite', 'enlite2016'), (req, res) => {
   res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
+});*/
+
+function base(mainComponent){
+  return '' +
+    '<!DOCTYPE html>' +
+    '<html lang="en">' +
+    '<head>' +
+      '<meta charset="UTF-8">' +
+      '<title>Learn Mithril</title>' +
+      '<link rel="stylesheet" href="/css/bundle.css">' +
+    '</head>' +
+
+      '<body>' +
+        '<main id="content">' +
+          mainComponent +
+        '</main>' +
+
+        '<script src="/js/bundle.js"></script>' +
+      '</body>' +
+    '</html>';
+}
+
+app.get('/', (req, res) => {
+  res.end(base(render(new TodoApp({ paramOne: 'ToDo', paramTwo: 'App' }))));
 });
 
 app.listen(app.get('port'));

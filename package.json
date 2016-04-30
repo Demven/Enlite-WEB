@@ -32,6 +32,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.1",
     "mithril": "^0.2.0",
+    "mithril-node-render": "^0.5.0",
     "run-sequence": "^1.1.5",
     "vinyl-source-stream": "^1.1.0"
   },

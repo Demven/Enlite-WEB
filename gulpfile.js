@@ -51,6 +51,8 @@ gulp.task('build:css', function () {
     .pipe(concatCss('bundle.css'))
     .pipe(gulp.dest('build/css'));
 });
+
+// js
 gulp.task('build:jsx', function () {
   return browserify(['./src/js/index.jsx'], {debug: true})
     .transform(babelify)
@@ -58,8 +60,23 @@ gulp.task('build:jsx', function () {
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('build/js'));
 });
-gulp.task('build:server-js', function () {
-  return gulp.src("server/**/*.js")
+gulp.task('build:js:components', function() {
+  return gulp.src('./src/components/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('build/server/components/'))
+});
+gulp.task('build:js:model', function() {
+  return gulp.src('./src/js/model/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('build/server/js/model/'));
+});
+gulp.task('build:js:util', function() {
+  return gulp.src('./src/js/util/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('build/server/js/util/'));
+});
+gulp.task('build:server:js', function () {
+  return gulp.src('server/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('build/server'));
 });
@@ -152,7 +169,7 @@ gulp.task('watch', function () {
 
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-  runSequence('build:clean', 'build:images', 'build:fonts', 'build:html', 'build:css', 'build:jsx', 'build:server-js', 'rev', 'gzip', callback);
+  runSequence('build:clean', 'build:images', 'build:fonts', 'build:html', 'build:css', 'build:jsx', 'build:js:components', 'build:js:model', 'build:js:util', 'build:server:js', 'rev', 'gzip', callback);
 });
 
 gulp.task('dev', function (callback) {
