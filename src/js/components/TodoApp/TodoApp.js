@@ -1,6 +1,6 @@
 import m from 'mithril';
-import Unloadable from '../../js/util/Unloadable';
-import TodoItem from '../../js/model/TodoItem';
+import Unloadable from '../../util/Unloadable';
+import TodoItem from '../../model/TodoItem';
 import _Footer from '../Footer/Footer';
 
 class TodoApp extends Unloadable {
@@ -62,6 +62,9 @@ class TodoApp extends Unloadable {
 
   view() {
     const Footer = new _Footer();
+
+    console.log(this.props.paramOne);
+    
     return (
       <div className="TodoApp" config={this.onMount}>
         <h2 className="TodoApp__title">{this.props.paramOne} {this.props.paramTwo}</h2>
