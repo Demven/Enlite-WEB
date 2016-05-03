@@ -63,11 +63,9 @@ class TodoApp extends Unloadable {
   view() {
     const Footer = new _Footer();
 
-    console.log(this.props.paramOne);
-    
     return (
       <div className="TodoApp" config={this.onMount}>
-        <h2 className="TodoApp__title">{this.props.paramOne} {this.props.paramTwo}</h2>
+        <h2 className="TodoApp__title">ToDo App</h2>
 
         <div className="TodoApp__form">
           <input

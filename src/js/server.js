@@ -22,14 +22,15 @@ app.use(cookieParser());
 app.use(compression());
 
 // render mithril app on server
-routes.forEach(({ name, PageComponent }) => {
-  app.get(name, authenticate('mithril', 'mithril'), (req, res) => {
-    res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent({ paramOne: 'ToDo', paramTwo: 'App' }))));
+routes.forEach(({ routePath, PageComponent }) => {
+  app.get(routePath, authenticate('mithril', 'mithril'), (req, res) => {
+    res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent())));
   });
 });
 
 // Just return html file without server rendering
 // import TodoApp from './components/TodoApp/TodoApp';
+// In such case - comment lines with configurng express routes
 // app.get('/', authenticate('mithril', 'mithril'), (req, res) => {
 //    res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
 // });
