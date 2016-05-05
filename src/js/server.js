@@ -30,7 +30,7 @@ routes.forEach(({ routePath, PageComponent }) => {
 
 // Just return html file without server rendering
 // import TodoApp from './components/TodoApp/TodoApp';
-// In such case - comment lines with configurng express routes
+// In such case just comment the lines with configuring express routes
 // app.get('/', authenticate('mithril', 'mithril'), (req, res) => {
 //    res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
 // });

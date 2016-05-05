@@ -54,7 +54,7 @@ gulp.task('build:css', function () {
 
 // js
 gulp.task('build:client:js', function () {
-  return browserify(['./src/js/index.jsx'], {debug: true})
+  return browserify(['./src/js/client.js'], {debug: true})
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))

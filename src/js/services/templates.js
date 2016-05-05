@@ -7,5 +7,3 @@ const indexHtml = fs.readFileSync(indexHtmlFilePath, 'utf8');
 export default function indexHtmlTemplater(renderPlaceholder, mainContent) {
   return indexHtml.replace(renderPlaceholder, mainContent);
 }
-
-
