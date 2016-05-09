@@ -1,8 +1,7 @@
 {
-  "name": "mithril-isomorph",
+  "name": "Enlite-WEB",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
     "postinstall": "gulp",
     "start": "node build/server/server.js",
