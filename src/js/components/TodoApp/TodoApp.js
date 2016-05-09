@@ -1,7 +1,7 @@
 import m from 'mithril';
-import Unloadable from '../../js/util/Unloadable';
-import TodoItem from '../../js/model/TodoItem';
-import _Footer from '../Footer/Footer.jsx';
+import Unloadable from '../../util/Unloadable';
+import TodoItem from '../../model/TodoItem';
+import _Footer from '../Footer/Footer';
 
 class TodoApp extends Unloadable {
   constructor(props) {
@@ -29,17 +29,23 @@ class TodoApp extends Unloadable {
 
   loadList() {
     let list = [];
-    const listFromStorage = JSON.parse(window.localStorage.getItem('todo')) || [];
-    if (listFromStorage.length > 0) {
-      list = listFromStorage.map((itemData) => new TodoItem(itemData));
+
+    if (typeof localStorage !== 'undefined') {
+      const listFromStorage = JSON.parse(localStorage.getItem('todo')) || [];
+      if (listFromStorage.length > 0) {
+        list = listFromStorage.map((itemData) => new TodoItem(itemData));
+      }
     }
+
     return list;
   }
 
   saveList() {
-    if (this.list.length > 0) {
-      console.log('save list of todos');
-      window.localStorage.setItem('todo', JSON.stringify(this.list));
+    if (typeof localStorage !== 'undefined') {
+      if (this.list.length > 0) {
+        console.log('save list of todos');
+        window.localStorage.setItem('todo', JSON.stringify(this.list));
+      }
     }
   }
 
@@ -56,9 +62,10 @@ class TodoApp extends Unloadable {
 
   view() {
     const Footer = new _Footer();
+
     return (
       <div className="TodoApp" config={this.onMount}>
-        <h2 className="TodoApp__title">{this.props.paramOne} {this.props.paramTwo}</h2>
+        <h2 className="TodoApp__title">ToDo App</h2>
 
         <div className="TodoApp__form">
           <input

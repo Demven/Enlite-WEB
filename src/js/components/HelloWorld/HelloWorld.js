@@ -1,5 +1,5 @@
 import m from 'mithril';
-import _Footer from '../Footer/Footer.jsx';
+import _Footer from '../Footer/Footer';
 
 class HelloWorld {
   constructor() {
