@@ -1,5 +1,8 @@
 @require 'base/*'
 
+@require '../../src/js/components/pages/landing/Landing/Landing'
+@require '../../src/js/components/pages/landing/LandingHeader/LandingHeader'
+
 @require '../../src/js/components/TodoApp/TodoApp'
 @require '../../src/js/components/HelloWorld/HelloWorld'
 @require '../../src/js/components/Footer/Footer'
@@ -22,8 +25,12 @@ html
 
 *::selection
   color: #fff;
-  background: $color-base;
+  background: $color-peach;
 
+input::-webkit-input-placeholder { color: $color-peach }
+input::-moz-placeholder          { color:$color-peach } /* Firefox 19+ */
+input:-moz-placeholder           { color: $color-peach } /* Firefox 18- */
+input:-ms-input-placeholder      { color: $color-peach }
 
 main
   width: 100vw

@@ -1,9 +1,9 @@
 import m from 'mithril';
-import _Header from '../Header/Header';
+import _Header from '../LandingHeader/LandingHeader';
 import _Advantages from '../Advantages/Advantages';
 import _People from '../People/People';
 import _Examination from '../Examination/Examination';
-import _Footer from '../Footer/Footer';
+import _Footer from '../LandingFooter/LandingFooter';
 
 class Landing {
   constructor() {
