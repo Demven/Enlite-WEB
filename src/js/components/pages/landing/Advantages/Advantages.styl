@@ -1,0 +1,40 @@
+@require '../../../../../styles/base/util'
+
+$componentName = 'Advantages'
+
+.{$componentName}
+  font-size: 1rem
+  background: $color-peach
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: 5em 0
+
+  &__title
+    width: 20em
+    font-family: $font-dincyr-regular
+    font-size: 3.8em
+    text-align: center
+
+  &__list
+    width: 96em
+    margin-top: 4em
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+
+    .{$componentName}__item
+      width: 26em
+      font-family: $font-dincyr-regular
+      padding: 1.5em 0
+
+    .{$componentName}__item-title
+      padding-bottom: .8em
+      color: $color-granate
+      font-size: 2em
+      text-transform: uppercase
+
+    .{$componentName}__item-text
+      color: $color-dark
+      font-size: 1.8em
