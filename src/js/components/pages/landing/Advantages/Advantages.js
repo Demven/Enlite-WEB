@@ -20,7 +20,7 @@ class Advantages {
           </li>
           <li className="Advantages__item">
             <h3 className="Advantages__item-title">Учебная</h3>
-            <div className="Advantages__item-text">Прзволяет готовиться к экзамену за одну ночь.</div>
+            <div className="Advantages__item-text">Позволяет готовиться к экзамену за одну ночь.</div>
           </li>
           <li className="Advantages__item">
             <h3 className="Advantages__item-title">Техническая</h3>

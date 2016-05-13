@@ -135,7 +135,7 @@ gulp.task('watch', function () {
   });
 
   // js
-  gulp.watch('src/js/**', function () {
+  gulp.watch('src/js/**/*.js', function () {
     runSequence('build:client:js', 'build:server:js', 'rev:js:manifest', 'rev:js:replace');
   });
 

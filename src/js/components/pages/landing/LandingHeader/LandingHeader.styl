@@ -121,10 +121,17 @@ $componentName = 'LandingHeader'
     .{$componentName}__scroller
       position: absolute
       bottom: 1em
-      left: 9.6em
+      left: 21em
       display: flex
       flex-direction: row
       align-items: center
+      cursor: pointer
+
+      &:hover
+        .{$componentName}__icon
+          background: lighten($color-granate, 30%)
+        .{$componentName}__title
+          color: $color-gray
 
       .{$componentName}__icon
         width: 4.5em
@@ -132,6 +139,33 @@ $componentName = 'LandingHeader'
         border-radius: 50%
         background: $color-granate
 
+        &:before
+          content: ''
+          width: 2.2em
+          height: 0.5em
+          position: absolute
+          top: 2.2em
+          left: 0.6em
+          transform: rotate(45deg)
+          background: $color-peach
+          border-radius: 20%
+
+        &:after
+          content: ''
+          width: 2.2em
+          height: 0.5em
+          position: absolute
+          top: 2.2em
+          left: 1.8em
+          transform: rotate(-45deg)
+          background: $color-peach
+          border-radius: 20%
+
       .{$componentName}__title
-        margin-left: 2em
+        width: 8em
+        margin-left: 0.8em
+        font-family: $font-dincyr-regular
+        font-size: 1.6em
+        color: $color-dark
+
 
