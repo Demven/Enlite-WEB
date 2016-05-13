@@ -2,12 +2,12 @@ import m from 'mithril';
 
 class LandingPeople {
   constructor() {
-    this.name = m.prop('LandingPeople');
+    this.name = m.prop('People');
   }
 
   view() {
     return (
-      <div className="LandingPeople">
+      <div className="People">
       </div>
     );
   }
