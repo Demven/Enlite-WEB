@@ -6,4 +6,42 @@ $componentName = 'People'
   font-size: 1rem
   height: 60em
   display: flex
+  justify-content: center
   background: #fff
+
+  &__static-container
+    &__title
+      font-family: $font-dincyr-regular
+      font-size: 3.8em
+
+  &__person
+    width: 110em
+    position: relative
+    opacity: 0
+    display: none
+
+    &--shown
+      display: block
+
+    &--visible
+      opacity: 1
+
+    &-photo
+      width: 34.2em
+      height: 44em
+      position: absolute
+      top: 7em
+      left: 0
+    &-name
+      font-family: $font-dincyr-bold
+      font-size: 24pt
+      color: $color-granate
+    &-text
+      width: 35em
+      height: 14em
+      position: absolute
+      bottom: 4.5em
+      right: 0
+      font-family: $font-dincyr-regular
+      font-size: 2em
+      color: $color-dark
