@@ -4,19 +4,76 @@ $componentName = 'People'
 
 .{$componentName}
   font-size: 1rem
-  height: 60em
+  height: 54.6em
   display: flex
-  justify-content: center
+  flex-direction: column
+  align-items: center
   background: #fff
+  position: relative
 
   &__static-container
-    &__title
-      font-family: $font-dincyr-regular
-      font-size: 3.8em
+    width: 100%
+    height: 5em
+    position: absolute
+    top: 4.8em
+    left: 0
+    display: flex
+    flex-direction: column
+    align-items: center
 
+    .{$componentName}__title
+      width: 25em
+      margin-left: 18.8em
+      font-family: $font-dincyr-regular
+      font-size: 4.4em
+
+    .{$componentName}__switcher
+      width: 110em
+      height: 10.9em
+      margin-top: 29.4em
+      margin-left: 83em
+
+      &-item
+        width: 8.3em
+        height: 10.9em
+        float: left
+        margin-right: 0.6em
+        position: relative
+        z-index: 10
+
+        &:after
+          content: ''
+          width: 100%
+          height: 100%
+          position: absolute
+          top: 0
+          left: 0
+          background: $color-dark
+          opacity: 0.85
+
+        &--chosen
+          &:after
+            display:none
+
+        &:hover
+          cursor: pointer
+          &:after
+            opacity: 0.6
+
+      &-photo
+        width: 8.3em
+        height: 10.9em
+
+  &__person-container
+    width: 110em
+    height: 54.6em
+    position: relative
   &__person
     width: 110em
-    position: relative
+    height: 54.6em
+    position: absolute
+    left: 0
+    top: 0
     opacity: 0
     display: none
 
@@ -30,18 +87,21 @@ $componentName = 'People'
       width: 34.2em
       height: 44em
       position: absolute
-      top: 7em
+      top: 5.5em
       left: 0
     &-name
+      position: absolute
+      top: 4em
+      left: 13em
       font-family: $font-dincyr-bold
-      font-size: 24pt
+      font-size: 3.2em
       color: $color-granate
     &-text
       width: 35em
-      height: 14em
+      height: 10em
       position: absolute
-      bottom: 4.5em
-      right: 0
+      top: 9em
+      left: 20.7em
       font-family: $font-dincyr-regular
       font-size: 2em
       color: $color-dark
