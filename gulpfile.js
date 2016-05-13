@@ -14,11 +14,21 @@ var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 var gzip = require('gulp-gzip');
 
-/* BUILD TASKS */
-gulp.task('build:clean', function (cb) {
+/* CLEAN TASKS */
+gulp.task('clean:css', function (cb) {
+  return del(['build/css'], cb);
+});
+gulp.task('clean:js', function (cb) {
+  return del(['build/client', 'build/server'], cb);
+});
+gulp.task('clean:html', function (cb) {
+  return del(['build/html'], cb);
+});
+gulp.task('clean', function (cb) {
   return del(['build'], cb);
 });
 
+/* BUILD TASKS */
 // images
 gulp.task('build:images', function () {
   return gulp.src('src/images/**')
@@ -36,9 +46,9 @@ gulp.task('build:html', function () {
   return gulp.src(['src/html/**'])
     .pipe(htmlMin({
       collapseWhitespace: true,
-      removeComments: false
+      removeComments: false,
     }))
-    .pipe(gulp.dest("build/html"));
+    .pipe(gulp.dest('build/html'));
 });
 
 // css
@@ -92,11 +102,11 @@ gulp.task('rev:js:manifest', function () {
     .pipe(rev.manifest())
     .pipe(gulp.dest('build/client'));
 });
-gulp.task("rev:js:replace", function () {
+gulp.task('rev:js:replace', function () {
   var manifest = gulp.src('build/client/rev-manifest.json');
 
   return gulp.src('build/html/index.html')
-    .pipe(revReplace({manifest: manifest}))
+    .pipe(revReplace({ manifest: manifest }))
     .pipe(gulp.dest('build/html'));
 });
 
@@ -128,15 +138,15 @@ gulp.task('gzip', function (callback) {
 gulp.task('watch', function () {
   // css
   gulp.watch('src/styles/**', function () {
-    runSequence('build:css', 'rev:css:manifest', 'rev:css:replace');
+    runSequence('clean:css', 'clean:html', 'build:html', 'build:css', 'rev:css:manifest', 'rev:css:replace', 'gzip:css');
   });
   gulp.watch('src/js/components/**/*.styl', function () {
-    runSequence('build:css', 'rev:css:manifest', 'rev:css:replace');
+    runSequence('clean:css', 'clean:html', 'build:html', 'build:css', 'rev:css:manifest', 'rev:css:replace', 'gzip:css');
   });
 
   // js
   gulp.watch('src/js/**/*.js', function () {
-    runSequence('build:client:js', 'build:server:js', 'rev:js:manifest', 'rev:js:replace');
+    runSequence('clean:js', 'clean:html', 'build:html', 'build:client:js', 'build:server:js', 'rev:js:manifest', 'rev:js:replace', 'gzip:js');
   });
 
   // images
@@ -148,15 +158,15 @@ gulp.task('watch', function () {
 
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-  runSequence('build:clean', 'build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'rev', 'gzip', callback);
+  runSequence('build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'rev', 'gzip', callback);
 });
 
 gulp.task('dev', function (callback) {
-  runSequence('build', 'watch', callback);
+  runSequence('clean', 'build', 'watch', callback);
 });
 
 gulp.task('production', function (callback) {
-  runSequence('build', callback);
+  runSequence('clean', 'build', callback);
 });
 
 gulp.task('default', function (callback) {
