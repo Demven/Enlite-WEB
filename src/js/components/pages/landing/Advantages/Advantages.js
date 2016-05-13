@@ -16,7 +16,7 @@ class Advantages {
           </li>
           <li className="Advantages__item">
             <h3 className="Advantages__item-title">Газеты и статьи</h3>
-            <div className="Advantages__item-text">Обучает моментально н пр аходить самые важные факты и запоминать их, а также читать вертикально, скользя по столбцу текста.</div>
+            <div className="Advantages__item-text">Обучает моментально находить самые важные факты и запоминать их, а также читать вертикально, скользя по столбцу текста.</div>
           </li>
           <li className="Advantages__item">
             <h3 className="Advantages__item-title">Учебная</h3>
