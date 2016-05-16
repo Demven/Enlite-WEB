@@ -37,5 +37,5 @@ routes.forEach(({ routePath, PageComponent }) => {
 // });
 
 app.listen(app.get('port'), app.get('ip-address'), () => {
-  console.info(`Server started on ${app.get('ip-address')}: ${app.get('port')}`);
+  console.log(`Server started on ${app.get('ip-address')}: ${app.get('port')}`);
 });
