@@ -4,8 +4,7 @@
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
     "postinstall": "gulp",
-    "start": "node build/server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/server/server.js"
   },
   "main": "node build/server/server.js",
   "author": "Dmitry Salnikov dmitry_salnikov@protonmail.com",
