@@ -13,7 +13,8 @@ const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
 const app = express();
 
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 4000);
+app.set('ip-address', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 
 app.use(express.static('build'));
 app.use(bodyParser.json());
@@ -35,6 +36,6 @@ routes.forEach(({ routePath, PageComponent }) => {
 //    res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
 // });
 
-app.listen(app.get('port'));
-
-console.info('Server started on localhost: 4000');
+app.listen(app.get('port'), app.get('ip-address'), () => {
+  console.info(`Server started on ${app.get('ip-address')}: ${app.get('port')}`);
+});

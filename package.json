@@ -7,6 +7,7 @@
     "start": "node build/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "main": "node build/server/server.js",
   "author": "Dmitry Salnikov dmitry_salnikov@protonmail.com",
   "license": "ISC",
   "dependencies": {
