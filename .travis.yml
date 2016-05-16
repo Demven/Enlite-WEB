@@ -5,4 +5,5 @@ deploy:
   provider: openshift
   user: "dementorvinegar@gmail.com"
   password: "041291" # can be encrypted
-  domain: "http://dev-enliteapp.rhcloud.com/"
+  app: dev-enliteapp
+  deployment_branch: master
