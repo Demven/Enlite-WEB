@@ -1,6 +1,8 @@
 language: node_js
+
 node_js:
   - "5.1"
+
 deploy:
   provider: openshift
   user: "dementorvinegar@gmail.com"
@@ -8,3 +10,9 @@ deploy:
   domain: "enliteapp"
   app: dev
   deployment_branch: master
+
+after_success:
+  - git config --global user.email "travis@localhost.localdomain"
+  - git config --global user.name "Travis CI"
+  - git add --all
+  - git commit -am "Travis change"
