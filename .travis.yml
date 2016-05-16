@@ -10,9 +10,4 @@ deploy:
   domain: "enliteapp"
   app: dev
   deployment_branch: master
-
-after_success:
-  - git config --global user.email "travis@localhost.localdomain"
-  - git config --global user.name "Travis CI"
-  - git add .dpl/
-  - git commit -am "Travis change"
+  skip_cleanup: true
