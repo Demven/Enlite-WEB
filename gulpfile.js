@@ -14,6 +14,11 @@ var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 var gzip = require('gulp-gzip');
 
+/* TRAVIS TASKS */
+gulp.task('travis:remove:gitignore', function (cb) {
+  return del(['.gitignore'], cb);
+});
+
 /* CLEAN TASKS */
 gulp.task('clean:css', function (cb) {
   return del(['build/css'], cb);
@@ -166,9 +171,9 @@ gulp.task('dev', function (callback) {
 });
 
 gulp.task('production', function (callback) {
-  runSequence('clean', 'build', callback);
+  runSequence('clean', 'build', 'travis:remove:gitignore', callback);
 });
 
 gulp.task('default', function (callback) {
-  runSequence('production', callback);
+  runSequence('clean', 'build', callback);
 });

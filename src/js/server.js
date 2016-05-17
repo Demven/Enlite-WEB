@@ -25,6 +25,7 @@ app.use(compression());
 // render mithril app on server
 routes.forEach(({ routePath, PageComponent }) => {
   app.get(routePath, authenticate('enlite', 'enlite2016'), (req, res) => {
+    res.type('html');
     res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent())));
   });
 });
