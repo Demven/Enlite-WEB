@@ -1,6 +1,7 @@
 import m from 'mithril';
 import classnames from 'classnames';
 import Person from '../../../../model/Person';
+import { chosePersonAction } from '../../../../redux/actions';
 
 class People {
   constructor(people) {
@@ -12,7 +13,7 @@ class People {
   }
 
   renderSwitcherItems() {
-    return this.people.map((person, index) => {
+    return this.people.map((person) => {
       const switcherClass = classnames('People__switcher-item', {
         'People__switcher-item--chosen': person.chosen(),
       });
@@ -20,9 +21,9 @@ class People {
       return (
         <li
           className={switcherClass}
-          key={index}
+          key={person.id()}
           onclick={() => {
-            console.log('click a person');
+            chosePersonAction(person.id());
           }}
         >
           <img
@@ -36,7 +37,7 @@ class People {
   }
 
   renderPersonSection() {
-    return this.people.map((person, index) => {
+    return this.people.map((person) => {
       const sectionClass = classnames('People__person', {
         'People__person--shown': person.chosen(),
         'People__person--visible': person.chosen(),
@@ -45,7 +46,7 @@ class People {
       return (
         <section
           className={sectionClass}
-          key={index}
+          key={person.id()}
         >
           <img
             className="People__person-photo"
