@@ -6,17 +6,22 @@ import _Examination from '../Examination/Examination';
 import _Footer from '../LandingFooter/LandingFooter';
 
 class Landing {
-  constructor() {
+  constructor(props) {
     this.name = m.prop('Landing');
+    this.props = props;
   }
 
   view() {
+    const { people } = this.props;
+    
     const Header = new _Header();
     const Advantages = new _Advantages();
-    const People = new _People();
+    const People = new _People(people);
     const Examination = new _Examination();
     const Footer = new _Footer();
 
+    console.log('RENDER LANDING');
+    
     return (
       <div className="Landing">
         <Header />

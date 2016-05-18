@@ -4,10 +4,10 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import render from 'mithril-node-render';
-
 import routes from './routes';
 import authenticate from './middleware/auth';
 import indexHtmlTemplater from './services/templates';
+import pageData from './data/landing';
 
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
@@ -26,7 +26,7 @@ app.use(compression());
 routes.forEach(({ routePath, PageComponent }) => {
   app.get(routePath, authenticate('enlite', 'enlite2016'), (req, res) => {
     res.type('html');
-    res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent())));
+    res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent(pageData))));
   });
 });
 
