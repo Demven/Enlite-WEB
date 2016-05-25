@@ -2,11 +2,24 @@ import m from 'mithril';
 import classnames from 'classnames';
 import Person from '../../../../model/Person';
 import { chosePersonAction } from '../../../../redux/actions';
+import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 
-class People {
-  constructor(people) {
+const propTypes = {
+  people: PropTypes.arrayOf({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    text: PropTypes.string,
+    chosen: PropTypes.boolean,
+  }).isRequired,
+};
+
+class People extends MithrilComponent {
+  constructor(props) {
+    super(props, propTypes);
     this.name = m.prop('People');
-    this.people = people.map((personData) => new Person(personData));
+
+    this.people = props.people.map((personData) => new Person(personData));
 
     this.renderSwitcherItems = this.renderSwitcherItems.bind(this);
     this.renderPersonSection = this.renderPersonSection.bind(this);
@@ -61,9 +74,6 @@ class People {
   }
 
   view() {
-
-    console.log('RENDER PEOPLE');
-
     return (
       <div className="People">
 

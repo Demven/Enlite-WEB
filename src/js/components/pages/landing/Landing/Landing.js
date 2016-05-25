@@ -16,7 +16,7 @@ class Landing {
 
     const Header = new _Header();
     const Advantages = new _Advantages();
-    const People = new _People(people);
+    const People = new _People({ people });
     const Examination = new _Examination();
     const Footer = new _Footer();
 
