@@ -1,18 +1,32 @@
 import m from 'mithril';
 import classnames from 'classnames';
 import Person from '../../../../model/Person';
+import { chosePersonAction } from '../../../../redux/actions';
+import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 
-class People {
-  constructor(people) {
+const propTypes = {
+  people: PropTypes.arrayOf({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    text: PropTypes.string,
+    chosen: PropTypes.boolean,
+  }).isRequired,
+};
+
+class People extends MithrilComponent {
+  constructor(props) {
+    super(props, propTypes);
     this.name = m.prop('People');
-    this.people = people.map((personData) => new Person(personData));
+
+    this.people = props.people.map((personData) => new Person(personData));
 
     this.renderSwitcherItems = this.renderSwitcherItems.bind(this);
     this.renderPersonSection = this.renderPersonSection.bind(this);
   }
 
   renderSwitcherItems() {
-    return this.people.map((person, index) => {
+    return this.people.map((person) => {
       const switcherClass = classnames('People__switcher-item', {
         'People__switcher-item--chosen': person.chosen(),
       });
@@ -20,9 +34,9 @@ class People {
       return (
         <li
           className={switcherClass}
-          key={index}
+          key={person.id()}
           onclick={() => {
-            console.log('click a person');
+            chosePersonAction(person.id());
           }}
         >
           <img
@@ -36,7 +50,7 @@ class People {
   }
 
   renderPersonSection() {
-    return this.people.map((person, index) => {
+    return this.people.map((person) => {
       const sectionClass = classnames('People__person', {
         'People__person--shown': person.chosen(),
         'People__person--visible': person.chosen(),
@@ -45,7 +59,7 @@ class People {
       return (
         <section
           className={sectionClass}
-          key={index}
+          key={person.id()}
         >
           <img
             className="People__person-photo"
@@ -60,9 +74,6 @@ class People {
   }
 
   view() {
-
-    console.log('RENDER PEOPLE');
-
     return (
       <div className="People">
 
