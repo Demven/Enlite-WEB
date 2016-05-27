@@ -74,9 +74,6 @@ class People extends MithrilComponent {
   }
 
   view() {
-    console.info('props', this.props);
-    console.info('name', this.props.name);
-
     return (
       <div className="People">
 

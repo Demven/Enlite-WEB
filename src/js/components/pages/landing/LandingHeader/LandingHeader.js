@@ -1,8 +1,14 @@
 import m from 'mithril';
+import scrollTo from '../../../../services/pageScroller';
+import { EXAMINATION_CLASS_NAME } from '../Examination/Examination';
 
 class LandingHeader {
   constructor() {
     this.name = m.prop('LandingHeader');
+  }
+
+  getOffsetToExaminationSection() {
+    return document.querySelector(EXAMINATION_CLASS_NAME).offsetTop + 2;
   }
 
   view() {
@@ -31,7 +37,12 @@ class LandingHeader {
             <button className="LandingHeader__form-button">Получить приглашение</button>
           </div>
 
-          <div className="LandingHeader__scroller">
+          <div
+            className="LandingHeader__scroller"
+            onclick={() => {
+              scrollTo(this.getOffsetToExaminationSection());
+            }}
+          >
             <div className="LandingHeader__icon"></div>
             <div className="LandingHeader__title">Проверить скорость чтения</div>
           </div>
