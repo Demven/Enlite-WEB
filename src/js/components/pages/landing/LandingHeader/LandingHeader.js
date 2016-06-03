@@ -1,10 +1,18 @@
 import m from 'mithril';
+import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 import scrollTo from '../../../../services/pageScroller';
+import _SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
 import { EXAMINATION_CLASS_NAME } from '../Examination/Examination';
 
-class LandingHeader {
-  constructor() {
-    this.name = m.prop('LandingHeader');
+const propTypes = {
+  subscriptionForm: PropTypes.object.isRequired,
+};
+
+class LandingHeader extends MithrilComponent {
+  constructor(props) {
+    super(props, propTypes);
+
+    this.componentName = m.prop('LandingHeader');
   }
 
   getOffsetToExaminationSection() {
@@ -12,6 +20,8 @@ class LandingHeader {
   }
 
   view() {
+    const SubscriptionForm = new _SubscriptionForm(this.props.subscriptionForm);
+
     return (
       <div className="LandingHeader">
         <div className="LandingHeader__bg"></div>
@@ -31,11 +41,7 @@ class LandingHeader {
         </div>
 
         <div className="LandingHeader__right-container">
-          <div className="LandingHeader__form-container">
-            <h4 className="LandingHeader__form-title">Получи доступ к закрытому тестированию</h4>
-            <input className="LandingHeader__form-input" placeholder="E-mail" />
-            <button className="LandingHeader__form-button">Получить приглашение</button>
-          </div>
+          <SubscriptionForm />
 
           <div
             className="LandingHeader__scroller"
