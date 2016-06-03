@@ -75,51 +75,14 @@ $componentName = 'LandingHeader'
     .{$componentName}__mobile-screen
       width: 22.1em
       height: 46.2em
-      background-image: $image('bg/mobile-screen.png')
+      background-image: $image('bg/iphone.png')
+      background-size: 100% 100%
 
 
   &__right-container
     display: flex
     flex-grow: 1
     position: relative
-
-    .{$componentName}__form-container
-      width: 38em
-      height: 20em
-      position: absolute
-      top: 18.8em
-      left: 9.6em
-
-    .{$componentName}__form-title
-      font-family: $font-dincyr-regular
-      font-size: 2em
-      color: $color-marine
-
-    .{$componentName}__form-input
-      width: 17em
-      height: 1.9em
-      font-size: 1.6em
-      font-family: $font-dincyr-regular
-      background: rgba(0,0,0,0);
-      margin-top: 2em
-      padding-left: 0.4em
-      color: $color-peach
-      border: 2px solid $color-peach
-
-      &:focus
-        outline-color: $color-peach
-
-    .{$componentName}__form-button
-      width: 17.7em
-      font-family: $font-dincyr-regular
-      font-size: 1.6em;
-      padding: 0.4em 0
-      margin-top: 1.8em
-      color: $color-dark
-      background: #fff
-
-      &:focus
-        outline-color: $color-peach
 
     .{$componentName}__scroller
       position: absolute

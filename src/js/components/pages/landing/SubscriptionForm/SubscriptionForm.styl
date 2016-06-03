@@ -1,0 +1,75 @@
+@require '../../../../../styles/base/util'
+
+$componentName = 'SubscriptionForm'
+
+.{$componentName}
+  width: 38em
+  height: 20em
+  position: absolute
+  top: 18.8em
+  left: 9.6em
+
+  &__title
+    font-family: $font-dincyr-regular
+    font-size: 2em
+    color: $color-marine
+
+    .{$componentName}--success &
+      display: none
+
+  &__input
+    width: 17em
+    height: 1.9em
+    font-size: 1.6em
+    font-family: $font-dincyr-regular
+    background: rgba(0,0,0,0);
+    margin-top: 2em
+    padding-left: 0.4em
+    color: $color-peach
+    border: 2px solid $color-peach
+
+    &:focus
+      outline-color: $color-peach
+
+    .{$componentName}--success &
+      display: none
+
+  &__button
+    width: 17.7em
+    font-family: $font-dincyr-regular
+    font-size: 1.6em;
+    padding: 0.4em 0
+    margin-top: 1.8em
+    color: $color-dark
+    background: #fff
+
+    &:focus
+      outline-color: $color-peach
+
+    .{$componentName}--success &
+      display: none
+
+  &__message
+    width: 17.68em
+    position: absolute
+    top: 137px
+    padding: 1em
+    display: flex
+    justify-content: center
+    align-content: center
+    font-family: $font-dincyr-regular
+    font-size: 1.6em
+    background: #fff
+    color: $color-dark
+    box-sizing: border-box
+    text-align: center
+
+    .{$componentName}--error &
+      top: 12.8em
+      color: $color-peach
+      background: $color-granate
+
+    .{$componentName}--success &
+      top: 4em
+      background: $color-peach
+

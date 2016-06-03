@@ -1,4 +1,12 @@
 export default {
+  subscriptionForm: {
+    email: '',
+    message: {
+      text: '',
+      isError: false,
+      isSuccess: false,
+    },
+  },
   people: [
     {
       id: 1,

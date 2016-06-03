@@ -17,9 +17,9 @@ const propTypes = {
 class People extends MithrilComponent {
   constructor(props) {
     super(props, propTypes);
-    this.name = m.prop('People');
 
-    this.people = props.people.map((personData) => new Person(personData));
+    this.name = m.prop('People');
+    this.people = this.props.people.map((personData) => new Person(personData));
 
     this.renderSwitcherItems = this.renderSwitcherItems.bind(this);
     this.renderPersonSection = this.renderPersonSection.bind(this);

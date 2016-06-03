@@ -1,5 +1,7 @@
 import m from 'mithril';
 
+export const EXAMINATION_CLASS_NAME = '.Examination';
+
 class Examination {
   constructor() {
     this.name = m.prop('Examination');
