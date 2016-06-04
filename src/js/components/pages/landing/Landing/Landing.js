@@ -17,13 +17,14 @@ class Landing extends MithrilComponent {
   view() {
     const {
       subscriptionForm,
+      examination,
       people,
     } = reduxStore.getState();
 
     const Header = new _Header({ subscriptionForm });
     const Advantages = new _Advantages();
     const People = new _People({ people });
-    const Examination = new _Examination();
+    const Examination = new _Examination(examination);
     const Footer = new _Footer();
 
     return (

@@ -7,10 +7,10 @@ class Footer {
 
   view() {
     return (
-      <div className="LandingFooter">
+      <section className="LandingFooter">
         <img src="/images/ic/logo-shadow.png" className="LandingFooter__logo" alt="Enlite logotype"/>
         <div className="LandingFooter__feedback">Обратная связь</div>
-      </div>
+      </section>
     );
   }
 }

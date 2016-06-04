@@ -1,6 +1,15 @@
 import _ from 'lodash';
+import initialData from '../data/landing';
 import { combineReducers } from 'redux';
-import { CHOSE_PERSON, UPDATE_EMAIL, SHOW_EMAIL_ERROR_MESSAGE, SHOW_EMAIL_SUCCESS_MESSAGE } from './actions';
+import {
+  CHOSE_PERSON,
+  UPDATE_EMAIL,
+  SHOW_EMAIL_ERROR_MESSAGE,
+  SHOW_EMAIL_SUCCESS_MESSAGE,
+  EXAMINATION_IS_STARTED,
+  EXAMINATION_IS_READ,
+  EXAMINATION_IS_FINISHED,
+} from './actions';
 
 function _chosePerson(people, action) {
   const peopleCopy = Object.assign([], people);
@@ -13,7 +22,7 @@ function _chosePerson(people, action) {
   return peopleCopy;
 }
 
-function peopleReducer(people = {}, action) {
+function peopleReducer(people = initialData.people, action) {
   switch (action.type) {
     case CHOSE_PERSON:
       return _chosePerson(people, action);
@@ -22,7 +31,7 @@ function peopleReducer(people = {}, action) {
   }
 }
 
-function subscriptionReducer(subscriptionForm = {}, action) {
+function subscriptionReducer(subscriptionForm = initialData.subscriptionForm, action) {
   switch (action.type) {
     case UPDATE_EMAIL:
       return Object.assign(subscriptionForm, { email: action.email });
@@ -47,9 +56,23 @@ function subscriptionReducer(subscriptionForm = {}, action) {
   }
 }
 
+function examinationReducer(examination = initialData.examination, action) {
+  switch (action.type) {
+    case EXAMINATION_IS_STARTED:
+      return Object.assign(examination, { isStarted: true, startedTime: action.time });
+    case EXAMINATION_IS_READ:
+      return Object.assign(examination, { isRead: true, finishedTime: action.time });
+    case EXAMINATION_IS_FINISHED:
+      return Object.assign(examination, { isFinished: true });
+    default:
+      return examination;
+  }
+}
+
 const rootReducer = combineReducers({
   subscriptionForm: subscriptionReducer,
   people: peopleReducer,
+  examination: examinationReducer,
 });
 
 export default rootReducer;

@@ -23,7 +23,7 @@ class LandingHeader extends MithrilComponent {
     const SubscriptionForm = new _SubscriptionForm(this.props.subscriptionForm);
 
     return (
-      <div className="LandingHeader">
+      <section className="LandingHeader">
         <div className="LandingHeader__bg"></div>
 
         <div className="LandingHeader__left-container">
@@ -53,7 +53,7 @@ class LandingHeader extends MithrilComponent {
             <div className="LandingHeader__title">Проверить скорость чтения</div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

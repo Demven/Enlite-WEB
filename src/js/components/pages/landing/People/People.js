@@ -75,7 +75,7 @@ class People extends MithrilComponent {
 
   view() {
     return (
-      <div className="People">
+      <section className="People">
 
         <div className="People__static-container">
           <h2 className="People__title">Просвещенные умы</h2>
@@ -88,7 +88,7 @@ class People extends MithrilComponent {
           {this.renderPersonSection()}
         </div>
 
-      </div>
+      </section>
     );
   }
 }

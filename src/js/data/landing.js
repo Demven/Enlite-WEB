@@ -7,6 +7,13 @@ export default {
       isSuccess: false,
     },
   },
+  examination: {
+    isStarted: false,
+    isRead: false,
+    isFinished: false,
+    startedTime: 0,
+    finishedTime: 0,
+  },
   people: [
     {
       id: 1,
