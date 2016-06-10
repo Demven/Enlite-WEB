@@ -2,7 +2,7 @@ import m from 'mithril';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 import scrollTo from '../../../../services/pageScroller';
 import _SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
-import { EXAMINATION_CLASS_NAME } from '../Examination/Examination';
+import { EXAMINATION_CLASS_NAME } from '../examination/Examination/Examination';
 
 const propTypes = {
   subscriptionForm: PropTypes.object.isRequired,

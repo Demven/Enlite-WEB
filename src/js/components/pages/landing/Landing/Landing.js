@@ -4,7 +4,7 @@ import reduxStore from '../../../../redux/store';
 import _Header from '../LandingHeader/LandingHeader';
 import _Advantages from '../Advantages/Advantages';
 import _People from '../People/People';
-import _Examination from '../Examination/Examination';
+import _Examination from '../examination/Examination/Examination';
 import _Footer from '../LandingFooter/LandingFooter';
 
 class Landing extends MithrilComponent {

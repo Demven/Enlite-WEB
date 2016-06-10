@@ -1,0 +1,48 @@
+@require '../../../../../../styles/base/util'
+
+$componentName = 'ExaminationTestScreen'
+
+.{$componentName}
+  height: 100%
+  overflow-y: scroll
+  padding-right: 1em
+
+  &__test
+    margin: 3em 0
+
+  &__test-question
+    font-family: $font-dincyr-bold
+    font-size: 2em
+    color: $color-dark
+
+  &__test-answer
+    position: relative
+
+  &__radio
+    opacity: 1
+    height: 20px
+    width: 20px
+    margin: 0
+
+  &__radio-label
+    position: absolute
+    top: 0
+    left: 0
+    .{$componentName}__radio-fake
+      height: 20px
+      width: 20px
+      background: red
+      border-radius: 50%
+
+      .{$componentName}__radio:checked + &:after
+        content: '';
+        height: 10px
+        width: 10px
+        background: blue
+        border-radius: 50%
+        position: absolute
+        top: 5px
+        left: 5px
+
+    .{$componentName}__radio-label-text
+      color: $color-dark
