@@ -13,7 +13,7 @@ const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
 const app = express();
 
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 4040);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 4000);
 app.set('ip-address', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 
 app.use(express.static('build'));

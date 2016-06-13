@@ -5,13 +5,20 @@ import {
   examinationIsStartedAction,
   examinationIsReadAction,
   examinationIsFinishedAction,
+  cancelExamination,
+  checkExaminationAnswer,
+  showExaminationTestError,
 } from '../../../../../redux/actions';
 import _ExaminationStartScreen from '../ExaminationStartScreen/ExaminationStartScreen';
 import _ExaminationReadingScreen from '../ExaminationReadingScreen/ExaminationReadingScreen';
 import _ExaminationTestScreen from '../ExaminationTestScreen/ExaminationTestScreen';
 import _ExaminationResultsScreen from '../ExaminationResultsScreen/ExaminationResultsScreen';
 
-export const EXAMINATION_CLASS_NAME = '.Examination';
+const EXAMINATION_CLASS_NAME = '.Examination';
+
+export function getOffsetToExaminationSection() {
+  return document.querySelector(EXAMINATION_CLASS_NAME).offsetTop + 2;
+}
 
 const propTypes = {
   isStarted: PropTypes.boolean.isRequired,
@@ -19,6 +26,8 @@ const propTypes = {
   isFinished: PropTypes.boolean.isRequired,
   startedTime: PropTypes.number.isRequired,
   finishedTime: PropTypes.number.isRequired,
+  testError: PropTypes.string,
+  test: PropTypes.array.isRequired,
 };
 
 class Examination extends MithrilComponent {
@@ -35,6 +44,9 @@ class Examination extends MithrilComponent {
   onStartExamination() {
     const startedTime = +(new Date());
     examinationIsStartedAction(startedTime);
+
+    document.body.scrollTop = getOffsetToExaminationSection();
+    document.body.className = 'prevent-scroll full-height';
   }
 
   onFinishedReading() {
@@ -44,10 +56,26 @@ class Examination extends MithrilComponent {
 
   onFinishedTest() {
     examinationIsFinishedAction();
+
+    document.body.className = '';
+  }
+
+  onCancel() {
+    cancelExamination();
+
+    document.body.className = '';
   }
 
   view() {
-    const { isStarted, isRead, isFinished, startedTime, finishedTime } = this.props;
+    const {
+      isStarted,
+      isRead,
+      isFinished,
+      startedTime,
+      finishedTime,
+      testError,
+      test,
+    } = this.props;
 
     const examinationClasses = classNames('Examination', {
       'Examination--started': isStarted,
@@ -65,7 +93,13 @@ class Examination extends MithrilComponent {
 
       screen = <ExaminationReadingScreen />;
     } else if (isStarted && isRead && !isFinished) {
-      const ExaminationTestScreen = new _ExaminationTestScreen({ onFinishedTest: this.onFinishedTest });
+      const ExaminationTestScreen = new _ExaminationTestScreen({
+        onFinishedTest: this.onFinishedTest,
+        checkExaminationAnswer,
+        showExaminationTestError,
+        testError,
+        test,
+      });
 
       screen = <ExaminationTestScreen />;
     } else if (isStarted && isRead && isFinished) {
@@ -74,8 +108,19 @@ class Examination extends MithrilComponent {
       screen = <ExaminationResultsScreen />;
     }
 
+    let closeButton = null;
+    if (isStarted && !isFinished) {
+      closeButton = (
+        <div
+          className="Examination__close"
+          onclick={this.onCancel}
+        ></div>
+      );
+    }
+
     return (
       <section className={examinationClasses}>
+        {closeButton}
         <div className="Examination__screen-wrapper">
           {screen}
         </div>

@@ -13,6 +13,45 @@ export default {
     isFinished: false,
     startedTime: 0,
     finishedTime: 0,
+    testError: '',
+    test: [
+      {
+        id: 1,
+        question: 'В 21 веке стало сложнее создавать и распространять информацию.',
+        answer: true,
+        userAnswer: undefined,
+      },
+      {
+        id: 2,
+        question: 'Ключевые моменты истории, ускорившие распространение информации по миру, – это создание печатного станка и изобретение интернета.',
+        answer: false,
+        userAnswer: undefined,
+      },
+      {
+        id: 3,
+        question: 'Главным недостатком информационного взрыва является дублирование одной и той же информации.',
+        answer: true,
+        userAnswer: undefined,
+      },
+      {
+        id: 4,
+        question: 'Скорость чтения можно повышать в ущерб качеству восприятия текста',
+        answer: false,
+        userAnswer: undefined,
+      },
+      {
+        id: 5,
+        question: 'Лучшие методики обучения обработки информации базируются на исследованиях о головном мозге',
+        answer: true,
+        userAnswer: undefined,
+      },
+      {
+        id: 6,
+        question: 'Развитие востребованного навыка работы с текстами также повышает концентрацию, развивает память, а также способствует уверенности при работе с книгой.',
+        answer: false,
+        userAnswer: undefined,
+      },
+    ],
   },
   people: [
     {

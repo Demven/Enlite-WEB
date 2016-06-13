@@ -9,6 +9,9 @@ export const SHOW_EMAIL_SUCCESS_MESSAGE = 'SHOW_EMAIL_SUCCESS_MESSAGE';
 export const EXAMINATION_IS_STARTED = 'EXAMINATION_IS_STARTED';
 export const EXAMINATION_IS_READ = 'EXAMINATION_IS_READ';
 export const EXAMINATION_IS_FINISHED = 'EXAMINATION_IS_FINISHED';
+export const CANCEL_EXAMINATION = 'CANCEL_EXAMINATION';
+export const CHECK_EXAMINATION_ANSWER = 'CHECK_EXAMINATION_ANSWER';
+export const SHOW_EXAMINATION_TEST_ERROR = 'SHOW_EXAMINATION_TEST_ERROR';
 
 export function chosePersonAction(personId) {
   store.dispatch({
@@ -55,5 +58,26 @@ export function examinationIsReadAction(time) {
 export function examinationIsFinishedAction() {
   store.dispatch({
     type: EXAMINATION_IS_FINISHED,
+  });
+}
+
+export function cancelExamination() {
+  store.dispatch({
+    type: CANCEL_EXAMINATION,
+  });
+}
+
+export function checkExaminationAnswer(testId, userAnswer) {
+  store.dispatch({
+    type: CHECK_EXAMINATION_ANSWER,
+    testId,
+    userAnswer,
+  });
+}
+
+export function showExaminationTestError(testError) {
+  store.dispatch({
+    type: SHOW_EXAMINATION_TEST_ERROR,
+    testError,
   });
 }

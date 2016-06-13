@@ -2,7 +2,7 @@ import m from 'mithril';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 import scrollTo from '../../../../services/pageScroller';
 import _SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
-import { EXAMINATION_CLASS_NAME } from '../examination/Examination/Examination';
+import { getOffsetToExaminationSection } from '../examination/Examination/Examination';
 
 const propTypes = {
   subscriptionForm: PropTypes.object.isRequired,
@@ -13,10 +13,6 @@ class LandingHeader extends MithrilComponent {
     super(props, propTypes);
 
     this.componentName = m.prop('LandingHeader');
-  }
-
-  getOffsetToExaminationSection() {
-    return document.querySelector(EXAMINATION_CLASS_NAME).offsetTop + 2;
   }
 
   view() {
@@ -46,7 +42,7 @@ class LandingHeader extends MithrilComponent {
           <div
             className="LandingHeader__scroller"
             onclick={() => {
-              scrollTo(this.getOffsetToExaminationSection());
+              scrollTo(getOffsetToExaminationSection());
             }}
           >
             <div className="LandingHeader__icon"></div>
