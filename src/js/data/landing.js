@@ -18,13 +18,13 @@ export default {
       {
         id: 1,
         question: 'В 21 веке стало сложнее создавать и распространять информацию.',
-        answer: true,
+        answer: false,
         userAnswer: undefined,
       },
       {
         id: 2,
         question: 'Ключевые моменты истории, ускорившие распространение информации по миру, – это создание печатного станка и изобретение интернета.',
-        answer: false,
+        answer: true,
         userAnswer: undefined,
       },
       {
@@ -48,7 +48,7 @@ export default {
       {
         id: 6,
         question: 'Развитие востребованного навыка работы с текстами также повышает концентрацию, развивает память, а также способствует уверенности при работе с книгой.',
-        answer: false,
+        answer: true,
         userAnswer: undefined,
       },
     ],

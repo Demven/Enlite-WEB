@@ -111,7 +111,7 @@ class Examination extends MithrilComponent {
 
       screen = <ExaminationTestScreen />;
     } else if (isStarted && isRead && isFinished) {
-      const ExaminationResultsScreen = new _ExaminationResultsScreen({ startedTime, finishedTime, subscriptionForm });
+      const ExaminationResultsScreen = new _ExaminationResultsScreen({ startedTime, finishedTime, test, subscriptionForm });
 
       screen = <ExaminationResultsScreen />;
     }

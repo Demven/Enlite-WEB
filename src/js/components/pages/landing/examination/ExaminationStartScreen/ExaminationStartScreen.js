@@ -10,7 +10,7 @@ class ExaminationStartScreen extends MithrilComponent {
   constructor(props) {
     super(props, propTypes);
 
-    this.name = m.prop('ExaminationStartScreen');
+    this.componentName = m.prop('ExaminationStartScreen');
   }
 
   view() {

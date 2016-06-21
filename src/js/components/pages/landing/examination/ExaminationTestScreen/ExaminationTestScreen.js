@@ -9,12 +9,7 @@ const propTypes = {
   checkExaminationAnswer: PropTypes.function.isRequired,
   showExaminationTestError: PropTypes.function.isRequired,
   testError: PropTypes.string,
-  test: PropTypes.arrayOf({
-    id: PropTypes.number,
-    question: PropTypes.string,
-    answer: PropTypes.boolean,
-//  userAnswer: PropTypes.boolean || undefined
-  }).isRequired,
+  test: PropTypes.array.isRequired,
 };
 
 class ExaminationTestScreen extends MithrilComponent {
@@ -42,11 +37,11 @@ class ExaminationTestScreen extends MithrilComponent {
   }
 
   finishTest() {
-    // if (this.checkAllAnswers()) {
-       this.props.onFinishedTest();
-    // } else {
-    //   this.props.showExaminationTestError('Пожалуйста, ответьте на все вопросы, чтобы завершить тест.');
-    // }
+    if (this.checkAllAnswers()) {
+      this.props.onFinishedTest();
+    } else {
+      this.props.showExaminationTestError('Пожалуйста, ответьте на все вопросы, чтобы завершить тест.');
+    }
   }
 
   renderTestAnswers() {

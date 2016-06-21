@@ -1,7 +1,11 @@
 import m from 'mithril';
 import classnames from 'classnames';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
-import { updateEmailAction, showEmailErrorMessageAction, showEmailSuccessMessageAction } from '../../../../redux/actions';
+import {
+  updateEmailAction,
+  showEmailErrorMessageAction,
+  showEmailSuccessMessageAction,
+} from '../../../../redux/actions';
 import { EMAIL_ERROR, validateEmail } from '../../../../services/validator';
 
 const propTypes = {
