@@ -60,9 +60,6 @@ function subscriptionReducer(subscriptionForm = initialData.subscriptionForm, ac
 }
 
 function _checkExaminationAnswer(examination, { testId, userAnswer }) {
-
-  console.info('before', examination.test);
-
   const newTest = Object.assign([], examination.test);
   const testToCheck = _.find(newTest, { id: testId });
   const indexOfTest = _.indexOf(newTest, testToCheck);
@@ -70,8 +67,6 @@ function _checkExaminationAnswer(examination, { testId, userAnswer }) {
 
   // replace old test with new object
   newTest.splice(indexOfTest, 1, checkedTest);
-
-  console.info('after', newTest);
 
   return Object.assign(examination, { test: newTest });
 }

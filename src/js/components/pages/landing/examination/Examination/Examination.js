@@ -21,13 +21,16 @@ export function getOffsetToExaminationSection() {
 }
 
 const propTypes = {
-  isStarted: PropTypes.boolean.isRequired,
-  isRead: PropTypes.boolean.isRequired,
-  isFinished: PropTypes.boolean.isRequired,
-  startedTime: PropTypes.number.isRequired,
-  finishedTime: PropTypes.number.isRequired,
-  testError: PropTypes.string,
-  test: PropTypes.array.isRequired,
+  examination: PropTypes.objectWith({
+    isStarted: PropTypes.boolean,
+    isRead: PropTypes.boolean,
+    isFinished: PropTypes.boolean,
+    startedTime: PropTypes.number,
+    finishedTime: PropTypes.number,
+    testError: PropTypes.string,
+    test: PropTypes.array,
+  }).isRequired,
+  subscriptionForm: PropTypes.object.isRequired,
 };
 
 class Examination extends MithrilComponent {
@@ -68,17 +71,20 @@ class Examination extends MithrilComponent {
 
   view() {
     const {
-      isStarted,
-      isRead,
-      isFinished,
-      startedTime,
-      finishedTime,
-      testError,
-      test,
+      examination: {
+        isStarted,
+        isRead,
+        isFinished,
+        startedTime,
+        finishedTime,
+        testError,
+        test,
+      },
+      subscriptionForm,
     } = this.props;
 
     const examinationClasses = classNames('Examination', {
-      'Examination--started': isStarted,
+      'Examination--is-started': isStarted,
       'Examination--is-read': isRead,
       'Examination--is-finished': isFinished,
     });
@@ -103,7 +109,7 @@ class Examination extends MithrilComponent {
 
       screen = <ExaminationTestScreen />;
     } else if (isStarted && isRead && isFinished) {
-      const ExaminationResultsScreen = new _ExaminationResultsScreen({ startedTime, finishedTime });
+      const ExaminationResultsScreen = new _ExaminationResultsScreen({ startedTime, finishedTime, subscriptionForm });
 
       screen = <ExaminationResultsScreen />;
     }

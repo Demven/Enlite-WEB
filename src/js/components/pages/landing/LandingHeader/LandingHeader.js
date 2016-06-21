@@ -16,7 +16,9 @@ class LandingHeader extends MithrilComponent {
   }
 
   view() {
-    const SubscriptionForm = new _SubscriptionForm(this.props.subscriptionForm);
+    const SubscriptionForm = new _SubscriptionForm({
+      formData: this.props.subscriptionForm,
+    });
 
     return (
       <section className="LandingHeader">

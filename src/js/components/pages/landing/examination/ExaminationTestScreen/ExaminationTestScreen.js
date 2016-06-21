@@ -42,15 +42,11 @@ class ExaminationTestScreen extends MithrilComponent {
   }
 
   finishTest() {
-    console.info('finishTest');
-
-    if (this.checkAllAnswers()) {
-      console.info('onFinishedTest');
-      this.props.onFinishedTest();
-    } else {
-      console.info('showExaminationTestError');
-      this.props.showExaminationTestError('Пожалуйста, ответьте на все вопросы, чтобы завершить тест.');
-    }
+    // if (this.checkAllAnswers()) {
+       this.props.onFinishedTest();
+    // } else {
+    //   this.props.showExaminationTestError('Пожалуйста, ответьте на все вопросы, чтобы завершить тест.');
+    // }
   }
 
   renderTestAnswers() {

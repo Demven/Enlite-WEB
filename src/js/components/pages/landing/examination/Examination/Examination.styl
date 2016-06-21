@@ -2,8 +2,10 @@
 
 $componentName = 'Examination'
 
+$examination-height-base = 64em
+
 .{$componentName}
-  height: 64em
+  height: $examination-height-base
   display: flex
   justify-content: center
   align-items: center
@@ -41,7 +43,21 @@ $componentName = 'Examination'
       left: 1.8em
       transform: rotate(-45deg)
 
+  $screen-wrapper-height-base = 42em
+  $screen-wrapper-height-max = 85vh
   &__screen-wrapper
-    height: 42em
+    height: $screen-wrapper-height-base
     width: 60em
     position: relative
+
+    .{$componentName}--is-started &
+      height: $screen-wrapper-height-max
+
+    .{$componentName}--is-finished &
+      height: $screen-wrapper-height-base
+
+  &--is-started
+    height: 100vh
+
+  &--is-finished
+    height: $examination-height-base

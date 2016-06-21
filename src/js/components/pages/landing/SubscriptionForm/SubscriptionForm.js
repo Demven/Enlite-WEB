@@ -5,12 +5,15 @@ import { updateEmailAction, showEmailErrorMessageAction, showEmailSuccessMessage
 import { EMAIL_ERROR, validateEmail } from '../../../../services/validator';
 
 const propTypes = {
-  email: PropTypes.string.isRequired,
-  message: PropTypes.objectWith({
-    text: PropTypes.string,
-    isError: PropTypes.boolean,
-    isSuccess: PropTypes.boolean,
+  formData: PropTypes.objectWith({
+    email: PropTypes.string,
+    message: PropTypes.object,
   }),
+  inExamination: PropTypes.boolean,
+};
+
+const defaultProps = {
+  inExamination: false,
 };
 
 const EVENT = {
@@ -19,7 +22,7 @@ const EVENT = {
 
 class SubscriptionForm extends MithrilComponent {
   constructor(props) {
-    super(props, propTypes);
+    super(props, propTypes, defaultProps);
 
     this.componentName = m.prop('SubscriptionForm');
     this.componentElement = m.prop(null);
@@ -86,7 +89,7 @@ class SubscriptionForm extends MithrilComponent {
   }
 
   view() {
-    const { email, message } = this.props;
+    const { formData: { email, message }, inExamination } = this.props;
 
     let messageNode = null;
     if (message.text) {
@@ -98,6 +101,7 @@ class SubscriptionForm extends MithrilComponent {
     }
 
     const formClass = classnames('SubscriptionForm', {
+      'SubscriptionForm--inExamination': inExamination,
       'SubscriptionForm--success': message.isSuccess,
       'SubscriptionForm--error': message.isError,
     });

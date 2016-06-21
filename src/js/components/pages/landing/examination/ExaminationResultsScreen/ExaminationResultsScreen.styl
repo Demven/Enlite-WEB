@@ -3,5 +3,55 @@
 $componentName = 'ExaminationResultsScreen'
 
 .{$componentName}
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  &__title
+    width: 50%
+    padding: 4em 0 0
+
+  &__corner
+    width: 2em
+    height: 2em
+    position: absolute
+    border-color: $color-dark
+
+    &--tl
+      top: 0
+      left: 0
+      border-top: 2px solid
+      border-left: 2px solid
+
+    &--tr
+      top: 0
+      right: 0
+      border-top: 2px solid
+      border-right: 2px solid
+
+    &--bl
+      bottom: 0
+      left: 0
+      border-bottom: 2px solid
+      border-left: 2px solid
+
+    &--br
+      bottom: 0
+      right: 0
+      border-bottom: 2px solid
+      border-right: 2px solid
+
   &__result
-    color: black
+    margin-top: -3em
+    text-align: center
+    color: $color-dark-gray
+
+    &-value
+      font-size: 5.2em
+      font-family: $font-dincyr-bold
+
+    &-title
+      font-size: 3em
+      font-family: $font-dincyr-regular
+      padding: 0.3em 0 0
+      text-transform: uppercase

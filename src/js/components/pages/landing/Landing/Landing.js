@@ -24,7 +24,7 @@ class Landing extends MithrilComponent {
     const Header = new _Header({ subscriptionForm });
     const Advantages = new _Advantages();
     const People = new _People({ people });
-    const Examination = new _Examination(examination);
+    const Examination = new _Examination({ examination, subscriptionForm });
     const Footer = new _Footer();
 
     return (
