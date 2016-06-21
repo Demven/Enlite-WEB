@@ -9,7 +9,10 @@ $componentName = 'ExaminationResultsScreen'
 
   &__title
     width: 50%
-    padding: 4em 0 0
+    padding: 2em 0 0
+
+    .{$componentName}--success &
+      padding: 7em 0 0
 
   &__corner
     width: 2em
@@ -42,7 +45,7 @@ $componentName = 'ExaminationResultsScreen'
       border-right: 2px solid
 
   &__result
-    margin-top: -3em
+    margin-top: -4em
     text-align: center
     color: $color-dark-gray
 
@@ -53,5 +56,14 @@ $componentName = 'ExaminationResultsScreen'
     &-title
       font-size: 3em
       font-family: $font-dincyr-regular
-      padding: 0.3em 0 0
       text-transform: uppercase
+
+  &__form
+    padding: 2em
+    margin-top: 2em
+    background: white
+
+    .{$componentName}--success &
+      margin: 0
+      padding: 0
+      background: rgba(255,255,255,0);

@@ -1,4 +1,5 @@
 import m from 'mithril';
+import classNames from 'classnames';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 import _ExaminationScreenTitle from '../ExaminationScreenTitle/ExaminationScreenTitle';
 import _SubscriptionForm from '../../SubscriptionForm/SubscriptionForm';
@@ -17,7 +18,7 @@ class ExaminationResultsScreen extends MithrilComponent {
   }
 
   view() {
-    const { startedTime, finishedTime } = this.props;
+    const { startedTime, finishedTime, subscriptionForm: { message } } = this.props;
 
     const ExaminationScreenTitle = new _ExaminationScreenTitle({ text: 'Ваша скорость чтения составляет' });
     const SubscriptionForm = new _SubscriptionForm({
@@ -25,8 +26,12 @@ class ExaminationResultsScreen extends MithrilComponent {
       inExamination: true,
     });
 
+    const screenClass = classNames('ExaminationResultsScreen', {
+      'ExaminationResultsScreen--success': message && message.isSuccess,
+    });
+
     return (
-      <div className="ExaminationResultsScreen">
+      <div className={screenClass}>
         <div className="ExaminationResultsScreen__corner ExaminationResultsScreen__corner--tl"></div>
         <div className="ExaminationResultsScreen__corner ExaminationResultsScreen__corner--tr"></div>
         <div className="ExaminationResultsScreen__corner ExaminationResultsScreen__corner--bl"></div>
@@ -41,7 +46,9 @@ class ExaminationResultsScreen extends MithrilComponent {
           <div className="ExaminationResultsScreen__result-title">сл/мин</div>
         </div>
 
-        <SubscriptionForm />
+        <div className="ExaminationResultsScreen__form">
+          <SubscriptionForm />
+        </div>
 
       </div>
     );

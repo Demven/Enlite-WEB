@@ -95,7 +95,6 @@ function examinationReducer(examination = initialData.examination, action) {
     case CHECK_EXAMINATION_ANSWER:
       return _checkExaminationAnswer(examination, action);
     case SHOW_EXAMINATION_TEST_ERROR:
-      console.info('SHOW_EXAMINATION_TEST_ERROR', action.testError);
       return Object.assign(examination, { testError: action.testError });
     default:
       return examination;

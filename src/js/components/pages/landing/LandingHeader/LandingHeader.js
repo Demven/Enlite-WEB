@@ -39,7 +39,9 @@ class LandingHeader extends MithrilComponent {
         </div>
 
         <div className="LandingHeader__right-container">
-          <SubscriptionForm />
+          <div className="LandingHeader__form">
+            <SubscriptionForm />
+          </div>
 
           <div
             className="LandingHeader__scroller"

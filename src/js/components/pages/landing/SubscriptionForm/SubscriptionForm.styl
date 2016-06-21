@@ -3,13 +3,11 @@
 $componentName = 'SubscriptionForm'
 
 .{$componentName}
-  width: 38em
-  height: 20em
-  position: absolute
-  top: 18.8em
-  left: 9.6em
+  width: 29em
+  position: relative
 
   &__title
+    width: 100%
     font-family: $font-dincyr-regular
     font-size: 2em
     color: $color-marine
@@ -17,9 +15,13 @@ $componentName = 'SubscriptionForm'
     .{$componentName}--success &
       display: none
 
+    .{$componentName}--in-examination &
+      color: $color-granate
+      text-align: center
+
   &__input
-    width: 17em
-    height: 1.9em
+    width: 100%
+    height: 2.3em
     font-size: 1.6em
     font-family: $font-dincyr-regular
     background: rgba(0,0,0,0);
@@ -27,6 +29,7 @@ $componentName = 'SubscriptionForm'
     padding-left: 0.4em
     color: $color-peach
     border: 2px solid $color-peach
+    box-sizing: border-box
 
     &:focus
       outline-color: $color-peach
@@ -34,8 +37,17 @@ $componentName = 'SubscriptionForm'
     .{$componentName}--success &
       display: none
 
+    .{$componentName}--in-examination &
+      text-align: center
+      margin-top: 1em
+      color: $color-dark
+      border-color: tint($color-dark, 60%)
+
+      &:focus
+        outline-color: tint($color-dark, 60%)
+
   &__button
-    width: 17.7em
+    width: 100%
     font-family: $font-dincyr-regular
     font-size: 1.6em;
     padding: 0.4em 0
@@ -48,6 +60,13 @@ $componentName = 'SubscriptionForm'
 
     .{$componentName}--success &
       display: none
+
+    .{$componentName}--in-examination &
+      margin-top: 1em
+      font-family: $font-dincyr-bold
+      background: $color-granate
+      color: $color-peach-light
+      border-color: tint($color-granate, 50%)
 
   &__message
     width: 17.68em
@@ -72,4 +91,15 @@ $componentName = 'SubscriptionForm'
     .{$componentName}--success &
       top: 4em
       background: $color-peach
+
+    .{$componentName}--in-examination &
+      top: 100%
+      left: -1.2em
+      position: absolute
+      padding: 1.4em 1.24em
+      margin-top: 2.8em
+      font-family: $font-dincyr-bold
+      color: $color-granate
+      background: white
+      box-sizing: content-box
 
