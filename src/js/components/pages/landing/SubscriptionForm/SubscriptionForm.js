@@ -1,16 +1,23 @@
 import m from 'mithril';
 import classnames from 'classnames';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
-import { updateEmailAction, showEmailErrorMessageAction, showEmailSuccessMessageAction } from '../../../../redux/actions';
+import {
+  updateEmailAction,
+  showEmailErrorMessageAction,
+  showEmailSuccessMessageAction,
+} from '../../../../redux/actions';
 import { EMAIL_ERROR, validateEmail } from '../../../../services/validator';
 
 const propTypes = {
-  email: PropTypes.string.isRequired,
-  message: PropTypes.objectWith({
-    text: PropTypes.string,
-    isError: PropTypes.boolean,
-    isSuccess: PropTypes.boolean,
+  formData: PropTypes.objectWith({
+    email: PropTypes.string,
+    message: PropTypes.object,
   }),
+  inExamination: PropTypes.boolean,
+};
+
+const defaultProps = {
+  inExamination: false,
 };
 
 const EVENT = {
@@ -19,10 +26,11 @@ const EVENT = {
 
 class SubscriptionForm extends MithrilComponent {
   constructor(props) {
-    super(props, propTypes);
+    super(props, propTypes, defaultProps);
 
     this.componentName = m.prop('SubscriptionForm');
     this.componentElement = m.prop(null);
+    this.emailValue = m.prop(props.formData.email);
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onMount = this.onMount.bind(this);
@@ -46,7 +54,7 @@ class SubscriptionForm extends MithrilComponent {
   }
 
   onSubmit() {
-    const { isValid, emailError } = validateEmail(this.props.email);
+    const { isValid, emailError } = validateEmail(this.emailValue);
 
     if (isValid) {
       const successMsg = 'Спасибо за участие! Мы выслали подтверждение вам на почту, пожалуйста проверьте свой почтовый ящик.';
@@ -79,14 +87,14 @@ class SubscriptionForm extends MithrilComponent {
 
   onKeyPress(ev) {
     if (ev.keyCode === 13 || +ev.charCode === 13 || ev.code === 'Enter') {
-      this.props.email = this.componentElement().querySelector('.SubscriptionForm__input').value;
+      this.emailValue = this.componentElement().querySelector('.SubscriptionForm__input').value;
 
       this.onSubmit();
     }
   }
 
   view() {
-    const { email, message } = this.props;
+    const { formData: { email, message }, inExamination } = this.props;
 
     let messageNode = null;
     if (message.text) {
@@ -98,13 +106,20 @@ class SubscriptionForm extends MithrilComponent {
     }
 
     const formClass = classnames('SubscriptionForm', {
+      'SubscriptionForm--in-examination': inExamination,
       'SubscriptionForm--success': message.isSuccess,
       'SubscriptionForm--error': message.isError,
     });
 
     return (
       <div className={formClass} config={this.onMount}>
-        <h4 className="SubscriptionForm__title">Получи доступ к закрытому тестированию</h4>
+        <h4 className="SubscriptionForm__title">
+          {
+            inExamination ?
+              'Получи доступ к закрытому тестированию, чтобы увеличить скорость чтения в 3 раза' :
+              'Получи доступ к закрытому тестированию'
+          }
+        </h4>
         <input
           type="email"
           className="SubscriptionForm__input"

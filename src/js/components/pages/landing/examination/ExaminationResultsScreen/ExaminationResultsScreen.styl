@@ -1,0 +1,69 @@
+@require '../../../../../../styles/base/util'
+
+$componentName = 'ExaminationResultsScreen'
+
+.{$componentName}
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  &__title
+    width: 50%
+    padding: 2em 0 0
+
+    .{$componentName}--success &
+      padding: 7em 0 0
+
+  &__corner
+    width: 2em
+    height: 2em
+    position: absolute
+    border-color: $color-dark
+
+    &--tl
+      top: 0
+      left: 0
+      border-top: 2px solid
+      border-left: 2px solid
+
+    &--tr
+      top: 0
+      right: 0
+      border-top: 2px solid
+      border-right: 2px solid
+
+    &--bl
+      bottom: 0
+      left: 0
+      border-bottom: 2px solid
+      border-left: 2px solid
+
+    &--br
+      bottom: 0
+      right: 0
+      border-bottom: 2px solid
+      border-right: 2px solid
+
+  &__result
+    margin-top: -4em
+    text-align: center
+    color: $color-dark-gray
+
+    &-value
+      font-size: 5.4em
+      font-family: $font-dincyr-bold
+
+    &-title
+      font-size: 3em
+      font-family: $font-dincyr-regular
+      text-transform: uppercase
+
+  &__form
+    padding: 2em
+    margin-top: 2em
+    background: white
+
+    .{$componentName}--success &
+      margin: 0
+      padding: 0
+      background: rgba(255,255,255,0);

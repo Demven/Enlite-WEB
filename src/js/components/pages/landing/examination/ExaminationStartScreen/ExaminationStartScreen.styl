@@ -1,0 +1,45 @@
+@require '../../../../../../styles/base/util'
+
+$componentName = 'ExaminationStartScreen'
+
+.{$componentName}
+  height: 100%
+  padding-bottom: 2.5em
+  box-sizing: border-box
+
+  &__corner
+    width: 2em
+    height: 2em
+    position: absolute
+    border-color: $color-dark
+
+    &--tl
+      top: 0
+      left: 0
+      border-top: 2px solid
+      border-left: 2px solid
+
+    &--tr
+      top: 0
+      right: 0
+      border-top: 2px solid
+      border-right: 2px solid
+
+    &--bl
+      bottom: 0
+      left: 0
+      border-bottom: 2px solid
+      border-left: 2px solid
+
+    &--br
+      bottom: 0
+      right: 0
+      border-bottom: 2px solid
+      border-right: 2px solid
+
+  &__invite-text
+    font-family: $font-dincyr-regular
+    font-size: 4.2em
+    color: $color-granate
+    text-align: center
+    padding: 0 1em 0.6em

@@ -1,0 +1,63 @@
+@require '../../../../../../styles/base/util'
+
+$componentName = 'Examination'
+
+$examination-height-base = 64em
+
+.{$componentName}
+  height: $examination-height-base
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 1rem
+  position: relative
+  background: $color-peach-light
+
+  &__close
+    width: 4em
+    height: 4em
+    position: absolute
+    top: 4em
+    right: 4em
+    cursor: pointer
+
+    &:before
+      content: ''
+      width: 0.4em
+      height: 4em
+      border-radius: 0.2em
+      background: $color-gray
+      position: absolute
+      top: 0
+      left: 1.8em
+      transform: rotate(45deg)
+
+    &:after
+      content: ''
+      width: 0.4em
+      height: 4em
+      border-radius: 0.2em
+      background: $color-gray
+      position: absolute
+      top: 0
+      left: 1.8em
+      transform: rotate(-45deg)
+
+  $screen-wrapper-height-base = 42em
+  $screen-wrapper-height-max = 85vh
+  &__screen-wrapper
+    height: $screen-wrapper-height-base
+    width: 60em
+    position: relative
+
+    .{$componentName}--is-started &
+      height: $screen-wrapper-height-max
+
+    .{$componentName}--is-finished &
+      height: $screen-wrapper-height-base
+
+  &--is-started
+    height: 100vh
+
+  &--is-finished
+    height: $examination-height-base

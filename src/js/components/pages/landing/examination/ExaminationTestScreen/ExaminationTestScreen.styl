@@ -1,0 +1,79 @@
+@require '../../../../../../styles/base/util'
+
+$componentName = 'ExaminationTestScreen'
+
+.{$componentName}
+  height: 100%
+  overflow-y: scroll
+  padding-right: 1em
+
+  &__test
+    margin: 3em 0
+
+  &__test-question
+    font-family: $font-dincyr-bold
+    font-size: 2em
+    color: $color-dark
+
+  &__test-answers
+    width: 60%
+    display: flex
+    justify-content: space-around
+    margin: 3em 0 6em 14%
+
+  &__test-answer
+    position: relative
+
+  &__radio
+    opacity: 1
+    height: 20px
+    width: 20px
+    margin: 0
+
+  &__radio-label
+    position: absolute
+    top: 0
+    left: 0
+    .{$componentName}__radio-fake
+      height: 2em
+      width: 2em
+      background: $color-granate
+      border-radius: 50%
+
+      &:after
+        content: ''
+        height: 1.4em
+        width: 1.4em
+        background: $color-peach-light
+        border-radius: 50%
+        position: absolute
+        top: 0.3em
+        left: 0.3em
+
+      .{$componentName}__radio:checked + &:after
+        content: ''
+        height: 2em
+        width: 2em
+        background: $color-granate
+        border-radius: 50%
+        position: absolute
+        top: 0
+        left: 0
+
+  &__radio-label-text
+    color: $color-gray
+    font-size: 1.4em
+    position: absolute
+    top: 0.16em
+    left: 1.8em
+    font-family: $font-dincyr-regular
+    text-transform: uppercase
+
+    .{$componentName}__radio:checked + .{$componentName}__radio-label &
+      font-family: $font-dincyr-bold
+
+  &__error-msg
+    text-align: center
+    color: $color-red
+    font-family: $font-dincyr-bold
+    font-size: 1.8em

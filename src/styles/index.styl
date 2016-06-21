@@ -5,7 +5,13 @@
 @require '../../src/js/components/pages/landing/SubscriptionForm/SubscriptionForm'
 @require '../../src/js/components/pages/landing/Advantages/Advantages'
 @require '../../src/js/components/pages/landing/People/People'
-@require '../../src/js/components/pages/landing/Examination/Examination'
+@require '../../src/js/components/pages/landing/examination/Examination/Examination'
+@require '../../src/js/components/pages/landing/examination/ExaminationButton/ExaminationButton'
+@require '../../src/js/components/pages/landing/examination/ExaminationScreenTitle/ExaminationScreenTitle'
+@require '../../src/js/components/pages/landing/examination/ExaminationStartScreen/ExaminationStartScreen'
+@require '../../src/js/components/pages/landing/examination/ExaminationReadingScreen/ExaminationReadingScreen'
+@require '../../src/js/components/pages/landing/examination/ExaminationTestScreen/ExaminationTestScreen'
+@require '../../src/js/components/pages/landing/examination/ExaminationResultsScreen/ExaminationResultsScreen'
 @require '../../src/js/components/pages/landing/LandingFooter/LandingFooter'
 
 @require '../../src/js/components/TodoApp/TodoApp'
@@ -26,16 +32,20 @@ html
     height: 100%
     &.prevent-scroll
       overflow: hidden
+    &.prevent-scroll-and-touch
+      overflow: hidden
       pointer-events: none
+    &.full-height
+      height: 100vh
 
 *::selection
   color: #fff;
   background: $color-granate;
 
-input::-webkit-input-placeholder { color: $color-peach }
-input::-moz-placeholder          { color:$color-peach } /* Firefox 19+ */
-input:-moz-placeholder           { color: $color-peach } /* Firefox 18- */
-input:-ms-input-placeholder      { color: $color-peach }
+input::-webkit-input-placeholder { color: currentColor }
+input::-moz-placeholder          { color: currentColor } /* Firefox 19+ */
+input:-moz-placeholder           { color: currentColor } /* Firefox 18- */
+input:-ms-input-placeholder      { color: currentColor }
 
 main
   width: 100vw

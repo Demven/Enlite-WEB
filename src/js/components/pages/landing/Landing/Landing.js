@@ -4,7 +4,7 @@ import reduxStore from '../../../../redux/store';
 import _Header from '../LandingHeader/LandingHeader';
 import _Advantages from '../Advantages/Advantages';
 import _People from '../People/People';
-import _Examination from '../Examination/Examination';
+import _Examination from '../examination/Examination/Examination';
 import _Footer from '../LandingFooter/LandingFooter';
 
 class Landing extends MithrilComponent {
@@ -17,13 +17,14 @@ class Landing extends MithrilComponent {
   view() {
     const {
       subscriptionForm,
+      examination,
       people,
     } = reduxStore.getState();
 
     const Header = new _Header({ subscriptionForm });
     const Advantages = new _Advantages();
     const People = new _People({ people });
-    const Examination = new _Examination();
+    const Examination = new _Examination({ examination, subscriptionForm });
     const Footer = new _Footer();
 
     return (
