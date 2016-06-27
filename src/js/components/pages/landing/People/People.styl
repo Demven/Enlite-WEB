@@ -114,13 +114,14 @@ $componentName = 'People'
       top: 2em
       .{$componentName}__title
         width: 100%
-        font-size: 3em
-        margin-left: 2em
+        font-size: 2.4em
+        margin-left: 2.6em
       .{$componentName}__switcher
-        font-size: 0.6em
+        width: auto
+        font-size: .49em
         position: absolute
-        bottom: 5.6em
-        left: 5.5em
+        bottom: 8.6em
+        left: 6.5em
         margin: 0
 
     &__person-container
@@ -137,7 +138,6 @@ $componentName = 'People'
         font-size: 0.6em
         position: static
         margin-left: 5.45em
-        margin-top: 1em
       &-name
         font-size: 2.3em
         position: static
@@ -151,5 +151,44 @@ $componentName = 'People'
         font-size: 1.6em
         box-sizing: border-box
         padding: 0 1.96em
+
+@media $tablet-any
+ .{$componentName}
+   height: 52.6em
+   &__static-container
+     height: 100%
+     top: 0
+     .{$componentName}__title
+       width: 100%
+       font-size: 3.6em
+       margin-left: 15.8em
+       margin-top: 0.65em
+     .{$componentName}__switcher
+       width: 100%
+       display: flex
+       justify-content: center
+       margin-left: 0
+       position: absolute
+       bottom: 3em
+
+   &__person-container
+     width: 100%
+
+   &__person
+     width: 100%
+     &-photo
+       width: 23em
+       height: auto
+       top: 3em
+       left: 3em
+     &-name
+       font-size: 2.8em
+       left: 10.25em
+       top: 3.4em
+     &-text
+       width: 60%
+       left: 16em
+       top: 8.1em
+       font-size: 1.8em
 
 
