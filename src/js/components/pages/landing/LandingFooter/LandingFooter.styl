@@ -11,7 +11,7 @@ $componentName = 'LandingFooter'
   align-items: center
 
   &__logo
-    height: 81%
+    height: 10.6em
     margin-right: 62em
     margin-top: 1.5em
 
@@ -26,3 +26,26 @@ $componentName = 'LandingFooter'
     &:hover
       text-decoration: underline
       cursor: pointer
+
+@media $mobile
+  .{$componentName}
+    justify-content: space-around
+    &__logo
+      font-size: 0.8em
+      margin-right: 0
+      margin-left: 0
+    &__feedback
+      font-size: 1.5em
+      transform: initial
+      margin-right: 0
+
+@media $tablet
+  .{$componentName}
+    justify-content: space-between
+    &__logo
+      margin-right: 0
+      margin-left: 3em
+    &__feedback
+      transform: initial
+      margin-right: 2em
+
