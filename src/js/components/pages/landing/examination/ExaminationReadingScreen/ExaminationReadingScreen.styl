@@ -13,3 +13,13 @@ $componentName = 'ExaminationReadingScreen'
     p
       padding-bottom: 0.5em
       text-indent: 1.5em
+
+@media $mobile
+  .{$componentName}
+    padding: 0 2em
+    &__text-to-read
+      font-size: 1.8em
+
+@media $tablet
+  .{$componentName}
+    padding: 0 6em

@@ -69,7 +69,7 @@ $componentName = 'SubscriptionForm'
       border-color: tint($color-granate, 50%)
 
   &__message
-    width: 17.68em
+    width: 100%
     position: absolute
     top: 137px
     padding: 1em
@@ -103,3 +103,8 @@ $componentName = 'SubscriptionForm'
       background: white
       box-sizing: content-box
 
+@media $mobile
+  .{$componentName}
+    &__message
+      .{$componentName}--success &
+        top: 2em
