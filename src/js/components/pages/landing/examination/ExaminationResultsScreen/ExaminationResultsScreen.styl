@@ -68,3 +68,21 @@ $componentName = 'ExaminationResultsScreen'
       margin: 0
       padding: 0
       background: rgba(255,255,255,0);
+
+@media $mobile
+  .{$componentName}
+    &__corner
+      &--tl
+        top: 2em
+        left: 2em
+      &--tr
+        top: 2em
+        right: 2em
+      &--bl
+        bottom: 2em
+        left: 2em
+      &--br
+        bottom: 2em
+        right: 2em
+    &__form
+      font-size: 0.8em

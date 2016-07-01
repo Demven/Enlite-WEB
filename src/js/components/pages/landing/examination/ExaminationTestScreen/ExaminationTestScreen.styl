@@ -77,3 +77,21 @@ $componentName = 'ExaminationTestScreen'
     color: $color-red
     font-family: $font-dincyr-bold
     font-size: 1.8em
+
+@media $mobile
+  .{$componentName}
+    padding: 0 2em
+    &__test-question
+      font-size: 1.6em
+    &__test-answers
+      width: 80%
+      margin-left: 0
+    &__test-answer
+      font-size: 0.9em
+    &__radio
+      width: 16px
+      height: 16px
+
+@media $tablet
+  .{$componentName}
+    padding: 0 6em
