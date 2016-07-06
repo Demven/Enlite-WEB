@@ -5,9 +5,9 @@ node_js:
 
 deploy:
   provider: openshift
-  user: "dementorvinegar@gmail.com"
-  password: "041291" # can be encrypted
-  domain: "enliteapp"
-  app: dev
+  user: "enlitedmind@gmail.com"
+  password: "enliteopenshift" # can be encrypted
+  domain: "enlited"
+  app: prod
   deployment_branch: master
   skip_cleanup: true
