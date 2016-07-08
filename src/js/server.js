@@ -5,8 +5,10 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import render from 'mithril-node-render';
 import routes from './routes';
+import Thanks from './components/Thanks/Thanks';
 import authenticate from './middleware/auth';
-import indexHtmlTemplater from './services/templates';
+import { indexHtmlTemplater, confirmationHtmlTemplater } from './services/templates';
+import { addContact, confirmEmail } from './services/elasticemail';
 import pageData from './data/landing';
 
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
@@ -21,6 +23,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compression());
+
+app.get('/thanks/:emailname/domain/:emaildomain/*', (req, res) => {
+  const email = `${req.params.emailname}@${req.params.emaildomain}`;
+
+  confirmEmail(email);
+
+  res.type('html');
+  res.end(confirmationHtmlTemplater(mithrilRenderPlaceholder, render(new Thanks(email))));
+});
+
+app.get('/addcontact/:email', (req, res) => {
+  addContact(req.params.email);
+  res.sendStatus(200);
+});
 
 // render mithril app on server
 routes.forEach(({ routePath, PageComponent }) => {

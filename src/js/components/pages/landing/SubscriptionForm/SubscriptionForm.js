@@ -57,6 +57,8 @@ class SubscriptionForm extends MithrilComponent {
     const { isValid, emailError } = validateEmail(this.emailValue);
 
     if (isValid) {
+      m.request({ method: 'GET', url: `/addcontact/${this.emailValue}` });
+
       const successMsg = 'Спасибо за участие! Мы выслали подтверждение вам на почту, пожалуйста проверьте свой почтовый ящик.';
       showEmailSuccessMessageAction(successMsg);
     } else {
