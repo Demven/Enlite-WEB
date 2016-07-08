@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import render from 'mithril-node-render';
 import routes from './routes';
-import HelloWorld from './components/HelloWorld/HelloWorld';
+import Thanks from './components/Thanks/Thanks';
 import authenticate from './middleware/auth';
 import { indexHtmlTemplater, confirmationHtmlTemplater } from './services/templates';
 import { addContact, confirmEmail } from './services/elasticemail';
@@ -30,7 +30,7 @@ app.get('/thanks/:emailname/domain/:emaildomain/*', (req, res) => {
   confirmEmail(email);
 
   res.type('html');
-  res.end(confirmationHtmlTemplater(mithrilRenderPlaceholder, render(new HelloWorld(email))));
+  res.end(confirmationHtmlTemplater(mithrilRenderPlaceholder, render(new Thanks(email))));
 });
 
 app.get('/addcontact/:email', (req, res) => {
