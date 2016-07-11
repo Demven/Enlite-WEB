@@ -27,12 +27,18 @@ export function addContact(emailToAdd) {
       + activationEmailName + '&email=' + emailToAdd + '&listName=' + CONTACT_LIST_MAIN + '&website='
       + SITE_URL + '&requiresActivation=true&source_Url=' + confirmUrl;
 
-  request.get(requestUrl);
+  request
+    .get(requestUrl)
+    .accept('text/html')
+    .end();
 }
 
 export function confirmEmail(email) {
   const action = 'contact/activateblocked';
   const requestUrl = API_URL + action + '?apikey=' + API_KEY + '&emails=' + email;
 
-  request.get(requestUrl);
+  request
+    .get(requestUrl)
+    .accept('text/html')
+    .end();
 }
