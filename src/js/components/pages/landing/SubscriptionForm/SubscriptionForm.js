@@ -54,10 +54,10 @@ class SubscriptionForm extends MithrilComponent {
   }
 
   onSubmit() {
-    const { isValid, emailError } = validateEmail(this.emailValue);
+    const { isValid, emailError } = validateEmail(this.emailValue());
 
     if (isValid) {
-      m.request({ method: 'GET', url: `/addcontact/${this.emailValue}` });
+      m.request({ method: 'GET', url: `/addcontact/${this.emailValue()}` });
 
       const successMsg = 'Спасибо за участие! Мы выслали подтверждение вам на почту, пожалуйста проверьте свой почтовый ящик.';
       showEmailSuccessMessageAction(successMsg);
@@ -89,7 +89,7 @@ class SubscriptionForm extends MithrilComponent {
 
   onKeyPress(ev) {
     if (ev.keyCode === 13 || +ev.charCode === 13 || ev.code === 'Enter') {
-      this.emailValue = this.componentElement().querySelector('.SubscriptionForm__input').value;
+      this.emailValue(this.componentElement().querySelector('.SubscriptionForm__input').value);
 
       this.onSubmit();
     }
