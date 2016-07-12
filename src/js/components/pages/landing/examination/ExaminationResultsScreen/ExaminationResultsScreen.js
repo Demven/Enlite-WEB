@@ -29,7 +29,7 @@ class ExaminationResultsScreen extends MithrilComponent {
   calculateIntegralSpeed() {
     const { startedTime, finishedTime } = this.props;
 
-    const WORDS_COUNT = 390;
+    const WORDS_COUNT = 342;
     const timeSpent = (finishedTime - startedTime) / 1000; // seconds
     const baseSpeed = (WORDS_COUNT / timeSpent) * 60; // words/min
     const wrongAnswersCount = _.reduce(this.props.test, (sum, test) => {

@@ -15,7 +15,7 @@ import {
 } from './actions';
 
 function _chosePerson(people, action) {
-  const peopleCopy = Object.assign([], people);
+  const peopleCopy = _.assign([], people);
 
   // deselect current chosen person
   _.find(peopleCopy, { chosen: true }).chosen = false;
@@ -37,9 +37,9 @@ function peopleReducer(people = initialData.people, action) {
 function subscriptionReducer(subscriptionForm = initialData.subscriptionForm, action) {
   switch (action.type) {
     case UPDATE_EMAIL:
-      return Object.assign(subscriptionForm, { email: action.email });
+      return _.assign({}, subscriptionForm, { email: action.email });
     case SHOW_EMAIL_ERROR_MESSAGE:
-      return Object.assign(subscriptionForm, {
+      return _.assign({}, subscriptionForm, {
         message: {
           text: action.text,
           isError: true,
@@ -47,7 +47,7 @@ function subscriptionReducer(subscriptionForm = initialData.subscriptionForm, ac
         },
       });
     case SHOW_EMAIL_SUCCESS_MESSAGE:
-      return Object.assign(subscriptionForm, {
+      return _.assign(subscriptionForm, {
         message: {
           text: action.text,
           isError: false,
@@ -60,15 +60,15 @@ function subscriptionReducer(subscriptionForm = initialData.subscriptionForm, ac
 }
 
 function _checkExaminationAnswer(examination, { testId, userAnswer }) {
-  const newTest = Object.assign([], examination.test);
+  const newTest = _.assign([], examination.test);
   const testToCheck = _.find(newTest, { id: testId });
   const indexOfTest = _.indexOf(newTest, testToCheck);
-  const checkedTest = Object.assign({}, testToCheck, { userAnswer });
+  const checkedTest = _.assign({}, testToCheck, { userAnswer });
 
   // replace old test with new object
   newTest.splice(indexOfTest, 1, checkedTest);
 
-  return Object.assign(examination, { test: newTest });
+  return _.assign({}, examination, { test: newTest });
 }
 
 let examinationInitialTest;
@@ -76,14 +76,14 @@ let examinationInitialTest;
 function examinationReducer(examination = initialData.examination, action) {
   switch (action.type) {
     case EXAMINATION_IS_STARTED:
-      examinationInitialTest = Object.assign([], initialData.examination.test);
-      return Object.assign(examination, { isStarted: true, startedTime: action.time });
+      examinationInitialTest = _.assign([], initialData.examination.test);
+      return _.assign({}, examination, { isStarted: true, startedTime: action.time });
     case EXAMINATION_IS_READ:
-      return Object.assign(examination, { isRead: true, finishedTime: action.time });
+      return _.assign({}, examination, { isRead: true, finishedTime: action.time });
     case EXAMINATION_IS_FINISHED:
-      return Object.assign(examination, { isFinished: true });
+      return _.assign({}, examination, { isFinished: true });
     case CANCEL_EXAMINATION:
-      return Object.assign(examination, {
+      return _.assign({}, examination, {
         isStarted: false,
         isRead: false,
         isFinished: false,
@@ -95,7 +95,7 @@ function examinationReducer(examination = initialData.examination, action) {
     case CHECK_EXAMINATION_ANSWER:
       return _checkExaminationAnswer(examination, action);
     case SHOW_EXAMINATION_TEST_ERROR:
-      return Object.assign(examination, { testError: action.testError });
+      return _.assign({}, examination, { testError: action.testError });
     default:
       return examination;
   }

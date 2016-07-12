@@ -33,6 +33,13 @@ const propTypes = {
   subscriptionForm: PropTypes.object.isRequired,
 };
 
+function fitContainerToWindowHeight() {
+  const offset = getOffsetToExaminationSection();
+  document.documentElement.scrollTop = offset;
+  document.body.scrollTop = offset;
+  document.body.className = 'prevent-scroll full-height';
+}
+
 class Examination extends MithrilComponent {
   constructor(props) {
     super(props, propTypes);
@@ -42,6 +49,9 @@ class Examination extends MithrilComponent {
     this.onStartExamination = this.onStartExamination.bind(this);
     this.onFinishedReading = this.onFinishedReading.bind(this);
     this.onFinishedTest = this.onFinishedTest.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.addEvents = this.addEvents.bind(this);
+    this.removeEvents = this.removeEvents.bind(this);
   }
 
   onStartExamination() {
@@ -49,26 +59,39 @@ class Examination extends MithrilComponent {
     examinationIsStartedAction(startedTime);
 
     window.setTimeout(() => {
-      document.body.scrollTop = getOffsetToExaminationSection();
-      document.body.className = 'prevent-scroll full-height';
+      fitContainerToWindowHeight();
     }, 10);
+
+    this.addEvents();
   }
 
   onFinishedReading() {
+    this.removeEvents();
+
     const finishedTime = +(new Date());
     examinationIsReadAction(finishedTime);
   }
 
   onFinishedTest() {
+    this.removeEvents();
     examinationIsFinishedAction();
 
     document.body.className = '';
   }
 
   onCancel() {
+    this.removeEvents();
     cancelExamination();
 
     document.body.className = '';
+  }
+
+  addEvents() {
+    window.addEventListener('resize', fitContainerToWindowHeight);
+  }
+
+  removeEvents() {
+    window.removeEventListener('resize', fitContainerToWindowHeight);
   }
 
   view() {
