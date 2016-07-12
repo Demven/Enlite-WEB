@@ -49,7 +49,9 @@ class Examination extends MithrilComponent {
     examinationIsStartedAction(startedTime);
 
     window.setTimeout(() => {
-      document.body.scrollTop = getOffsetToExaminationSection();
+      const offset = getOffsetToExaminationSection();
+      document.documentElement.scrollTop = offset;
+      document.body.scrollTop = offset;
       document.body.className = 'prevent-scroll full-height';
     }, 10);
   }
