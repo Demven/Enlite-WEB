@@ -7,12 +7,14 @@ var babelify = require('babelify');
 var browserify = require('browserify');
 var runSequence = require('run-sequence').use(gulp);
 var stylus = require('gulp-stylus');
-var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var concatCss = require('gulp-concat-css');
+var cssmin = require('gulp-cssmin');
 var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 var gzip = require('gulp-gzip');
+var uglify = require('gulp-uglify');
+var pump = require('pump');
 
 /* TRAVIS TASKS */
 gulp.task('travis:remove:gitignore', function (cb) {
@@ -78,9 +80,36 @@ gulp.task('build:client:js', function () {
 gulp.task('build:server:js', function() {
   return gulp.src('./src/js/**/*.js')
     .pipe(babel())
-    .pipe(gulp.dest('build/server/'))
+    .pipe(gulp.dest('build/server/'));
 });
 
+
+/* MINIFICATION */
+// css
+gulp.task('min:css', function(cb) {
+  pump([
+    gulp.src('build/css/bundle.css'),
+    cssmin(),
+    gulp.dest('build/css/')
+  ], cb);
+});
+// client js
+gulp.task('min:client:js', function(cb) {
+  pump([
+    gulp.src('build/client/bundle.js'),
+    uglify(),
+    gulp.dest('build/client/')
+  ], cb);
+});
+// main
+gulp.task('min', function (callback) {
+  if (process.env.NODE_ENV === 'production') {
+    runSequence('min:css', 'min:client:js', callback);
+  } else {
+    // skip minification
+    callback();
+  }
+});
 
 /* REVISIONS */
 // css
@@ -91,7 +120,7 @@ gulp.task('rev:css:manifest', function () {
     .pipe(rev.manifest())
     .pipe(gulp.dest('build/css'));
 });
-gulp.task("rev:css:replace", function () {
+gulp.task('rev:css:replace', function () {
   var manifest = gulp.src('build/css/rev-manifest.json');
 
   return gulp.src('build/html/index.html')
@@ -163,10 +192,10 @@ gulp.task('watch', function () {
 
 /* MAIN TASKS */
 gulp.task('build', function (callback) {
-  runSequence('build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'rev', 'gzip', callback);
+  runSequence('build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'min', 'rev', 'gzip', callback);
 });
 
-gulp.task('dev', function (callback) {
+gulp.task('dev-watch', function (callback) {
   runSequence('clean', 'build', 'watch', callback);
 });
 
@@ -175,5 +204,11 @@ gulp.task('production', function (callback) {
 });
 
 gulp.task('default', function (callback) {
-  runSequence('clean', 'build', callback);
+  if (process.env.NODE_ENV === 'production') {
+    // production sequence
+    runSequence('clean', 'build', 'travis:remove:gitignore', callback);
+  } else {
+    // development sequence
+    runSequence('clean', 'build', callback);
+  }
 });
