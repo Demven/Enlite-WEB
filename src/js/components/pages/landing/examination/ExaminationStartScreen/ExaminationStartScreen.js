@@ -28,7 +28,7 @@ class ExaminationStartScreen extends MithrilComponent {
         <div className="ExaminationStartScreen__corner ExaminationStartScreen__corner--bl"></div>
         <div className="ExaminationStartScreen__corner ExaminationStartScreen__corner--br"></div>
 
-        <h2 className="ExaminationStartScreen__invite-text">Вы можете проверить свою скорость чтения прямо сейчас</h2>
+        <h2 className="ExaminationStartScreen__invite-text">Проверьте свою скорость чтения</h2>
 
         <ExaminationButton />
       </div>
