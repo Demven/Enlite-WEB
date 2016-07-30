@@ -6,7 +6,7 @@ import compression from 'compression';
 import render from 'mithril-node-render';
 import routes from './routes';
 import Thanks from './components/Thanks/Thanks';
-import authenticate from './middleware/auth';
+// import authenticate from './middleware/auth';
 import { indexHtmlTemplater, confirmationHtmlTemplater } from './services/templates';
 import { addContact, confirmEmail } from './services/elasticemail';
 import pageData from './data/landing';
@@ -40,7 +40,7 @@ app.get('/addcontact/:email', (req, res) => {
 
 // render mithril app on server
 routes.forEach(({ routePath, PageComponent }) => {
-  app.get(routePath, authenticate('enlite', 'enlite2016'), (req, res) => {
+  app.get(routePath, /* authenticate('enlite', 'enlite2016'), */ (req, res) => {
     res.type('html');
     res.end(indexHtmlTemplater(mithrilRenderPlaceholder, render(new PageComponent(pageData))));
   });
