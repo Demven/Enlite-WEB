@@ -15,11 +15,7 @@ export function connectMongo() {
 
     mongoose.connect(connectionString);
   } else {
-    const options = {
-      user: 'myUserName',
-      pass: 'myPassword',
-    };
-    mongoose.connect('mongodb://localhost/prod', options);
+    mongoose.connect('mongodb://localhost/prod');
   }
 
   global.console.info('Connect to the database.');
