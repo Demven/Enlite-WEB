@@ -17,7 +17,21 @@ function splitEmail(email) {
   };
 }
 
-export function addContact(emailToAdd) {
+export function sendEmailAboutPassReset(email, newPassword) {
+  const action = 'email/send';
+  const templateName = 'reset_password';
+  const changePasswordUrl = `${SITE_URL}/change-password/${email}`;
+
+  const requestUrl = API_URL + action + '?apikey=' + API_KEY + '&to=' + email + '&template=' + templateName
+    + '&merge_new_password=' + newPassword + '&merge_url_change_password=' + changePasswordUrl;
+
+  request
+    .get(requestUrl)
+    .accept('text/html')
+    .end();
+}
+
+export function addContactWithConfirmation(emailToAdd) {
   const action = 'contact/add';
   const activationEmailName = 'welcome';
   const { name, domain } = splitEmail(emailToAdd);

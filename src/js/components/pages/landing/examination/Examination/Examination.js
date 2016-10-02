@@ -8,7 +8,7 @@ import {
   cancelExamination,
   checkExaminationAnswer,
   showExaminationTestError,
-} from '../../../../../redux/actions';
+} from '../../../../../redux/landing/actions';
 import _ExaminationStartScreen from '../ExaminationStartScreen/ExaminationStartScreen';
 import _ExaminationReadingScreen from '../ExaminationReadingScreen/ExaminationReadingScreen';
 import _ExaminationTestScreen from '../ExaminationTestScreen/ExaminationTestScreen';

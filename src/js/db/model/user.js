@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import Promise from 'bluebird';
 import validator from 'validator';
-import { isPassword, isLogin } from '../validators';
-import passwordGenerator from 'random-password-generator';
+import { isPassword, isLogin } from '../../services/validators';
 import { sendError, ERROR } from '../errors';
 
 const userSchema = new mongoose.Schema({
@@ -222,11 +221,15 @@ export function auth(login, pass) {
  * @param email
  * @return success - boolean
  */
-export function resetPassword(email) {
+export function resetPassword(email, newPassword) {
   let rejected = false;
   return new Promise((resolve, reject) => {
     if (!validator.isEmail(email)) {
       reject(sendError(ERROR.EMAIL_INCORRECT, ''));
+      return;
+    }
+    if (!isPassword(newPassword)) {
+      reject(sendError(ERROR.PASS_INCORRECT, ''));
       return;
     }
 
@@ -249,8 +252,6 @@ export function resetPassword(email) {
         if (rejected || !user) {
           return;
         }
-
-        const newPassword = passwordGenerator.generate();
 
         // reset password for this user
         User.update({ _id: user._id }, { pass: newPassword, generatedNewPass: true }, (err, resultOfUpdate) => {

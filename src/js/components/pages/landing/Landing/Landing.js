@@ -1,6 +1,6 @@
 import m from 'mithril';
 import { MithrilComponent } from 'mithril-proptypes';
-import reduxStore from '../../../../redux/store';
+import reduxStore from '../../../../redux/landing/store';
 import _Header from '../LandingHeader/LandingHeader';
 import _Advantages from '../Advantages/Advantages';
 import _People from '../People/People';
