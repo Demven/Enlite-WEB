@@ -8,7 +8,7 @@ export default function addClientAPI(app) {
   app.post('/add-contact', (req, res) => {
     const { email } = req.body;
     if (email) {
-      addContactWithConfirmation(req.params.email);
+      addContactWithConfirmation(email);
       res.json({ success: true });
     } else {
       res.status(400).json({ error: true });

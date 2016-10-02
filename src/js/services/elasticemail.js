@@ -25,7 +25,7 @@ export function sendEmailAboutPassReset(email, newPassword) {
   const requestUrl = API_URL + action + '?apikey=' + API_KEY + '&to=' + email + '&template=' + templateName
     + '&merge_new_password=' + newPassword + '&merge_url_change_password=' + changePasswordUrl;
 
-  request
+  return request
     .get(requestUrl)
     .accept('text/html')
     .end();
@@ -41,7 +41,7 @@ export function addContactWithConfirmation(emailToAdd) {
       + activationEmailName + '&email=' + emailToAdd + '&listName=' + CONTACT_LIST_MAIN + '&website='
       + SITE_URL + '&requiresActivation=true&source_Url=' + confirmUrl;
 
-  request
+  return request
     .get(requestUrl)
     .accept('text/html')
     .end();
@@ -51,7 +51,7 @@ export function confirmEmail(email) {
   const action = 'contact/activateblocked';
   const requestUrl = API_URL + action + '?apikey=' + API_KEY + '&emails=' + email;
 
-  request
+  return request
     .get(requestUrl)
     .accept('text/html')
     .end();
