@@ -1,5 +1,6 @@
 import m from 'mithril';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
+import { trackPageView } from '../../../../analytics/google';
 import reduxStore from '../../../../redux/change-password/store';
 import _ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm';
 
@@ -11,8 +12,16 @@ class ChangePassword extends MithrilComponent {
   constructor(props) {
     super(props, propTypes);
 
+    this.onMount = this.onMount.bind(this);
+
     this.componentName = m.prop('ChangePassword');
     this.email = m.prop(props ? props.email : '');
+  }
+
+  onMount(element, isInit) {
+    if (!isInit) {
+      trackPageView();
+    }
   }
 
   view() {
@@ -25,7 +34,7 @@ class ChangePassword extends MithrilComponent {
     const ChangePasswordForm = new _ChangePasswordForm({ changePasswordForm, email: this.email() });
 
     return (
-      <div className="ChangePassword">
+      <div className="ChangePassword" config={this.onMount}>
         <div className="ChangePassword__header">
           <a href="/">
             <img className="ChangePassword__logo" src="/images/ic/logo.png" alt="Enlite logo" />
