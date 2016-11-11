@@ -15,3 +15,11 @@ const confirmationHtml = fs.readFileSync(confirmationHtmlFilePath, 'utf8');
 export function confirmationHtmlTemplater(renderPlaceholder, mainContent) {
   return confirmationHtml.replace(renderPlaceholder, mainContent);
 }
+
+
+const changePasswordHtmlFilePath = path.join(__dirname, '../../../build/html', 'change-password.html');
+const changePasswordHtml = fs.readFileSync(changePasswordHtmlFilePath, 'utf8');
+
+export function changePasswordHtmlTemplater(renderPlaceholder, mainContent) {
+  return changePasswordHtml.replace(renderPlaceholder, mainContent);
+}

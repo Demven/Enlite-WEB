@@ -8,7 +8,8 @@ import {
   cancelExamination,
   checkExaminationAnswer,
   showExaminationTestError,
-} from '../../../../../redux/actions';
+} from '../../../../../redux/landing/actions';
+import { trackEvent } from '../../../../../analytics/google';
 import _ExaminationStartScreen from '../ExaminationStartScreen/ExaminationStartScreen';
 import _ExaminationReadingScreen from '../ExaminationReadingScreen/ExaminationReadingScreen';
 import _ExaminationTestScreen from '../ExaminationTestScreen/ExaminationTestScreen';
@@ -58,6 +59,8 @@ class Examination extends MithrilComponent {
     const startedTime = +(new Date());
     examinationIsStartedAction(startedTime);
 
+    trackEvent('click', 'start-examination');
+
     window.setTimeout(() => {
       fitContainerToWindowHeight();
     }, 10);
@@ -70,11 +73,15 @@ class Examination extends MithrilComponent {
 
     const finishedTime = +(new Date());
     examinationIsReadAction(finishedTime);
+
+    trackEvent('click', 'read-examination');
   }
 
   onFinishedTest() {
     this.removeEvents();
     examinationIsFinishedAction();
+
+    trackEvent('click', 'finish-examination');
 
     document.body.className = '';
   }
@@ -82,6 +89,8 @@ class Examination extends MithrilComponent {
   onCancel() {
     this.removeEvents();
     cancelExamination();
+
+    trackEvent('click', 'cancel-examination');
 
     document.body.className = '';
   }

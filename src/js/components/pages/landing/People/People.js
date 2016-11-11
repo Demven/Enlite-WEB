@@ -1,7 +1,7 @@
 import m from 'mithril';
 import classnames from 'classnames';
 import Person from '../../../../model/Person';
-import { chosePersonAction } from '../../../../redux/actions';
+import { chosePersonAction } from '../../../../redux/landing/actions';
 import { MithrilComponent, PropTypes } from 'mithril-proptypes';
 
 const propTypes = {

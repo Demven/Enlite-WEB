@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import initialData from '../data/landing';
+import initialData from '../../data/landing';
 import { combineReducers } from 'redux';
 import {
   CHOSE_PERSON,

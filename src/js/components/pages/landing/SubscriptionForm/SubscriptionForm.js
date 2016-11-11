@@ -5,8 +5,9 @@ import {
   updateEmailAction,
   showEmailErrorMessageAction,
   showEmailSuccessMessageAction,
-} from '../../../../redux/actions';
-import { EMAIL_ERROR, validateEmail } from '../../../../services/validator';
+} from '../../../../redux/landing/actions';
+import { trackEvent } from '../../../../analytics/google';
+import { EMAIL_ERROR, validateEmail } from '../../../../services/validators';
 
 const propTypes = {
   formData: PropTypes.objectWith({
@@ -57,10 +58,11 @@ class SubscriptionForm extends MithrilComponent {
     const { isValid, emailError } = validateEmail(this.emailValue());
 
     if (isValid) {
-      m.request({ method: 'GET', url: `/addcontact/${this.emailValue()}` });
+      m.request({ method: 'POST', url: '/add-contact', data: { email: this.emailValue() } });
 
       const successMsg = 'Спасибо за участие! Мы выслали подтверждение вам на почту, пожалуйста, проверьте свой почтовый ящик.';
       showEmailSuccessMessageAction(successMsg);
+      trackEvent('click', 'subscribe-email');
     } else {
       let errorMsg;
       switch (emailError) {

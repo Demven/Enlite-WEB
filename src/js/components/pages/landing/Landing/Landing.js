@@ -1,6 +1,7 @@
 import m from 'mithril';
 import { MithrilComponent } from 'mithril-proptypes';
-import reduxStore from '../../../../redux/store';
+import { trackPageView } from '../../../../analytics/google';
+import reduxStore from '../../../../redux/landing/store';
 import _Header from '../LandingHeader/LandingHeader';
 import _Advantages from '../Advantages/Advantages';
 import _People from '../People/People';
@@ -11,7 +12,15 @@ class Landing extends MithrilComponent {
   constructor(props) {
     super(props);
 
+    this.onMount = this.onMount.bind(this);
+
     this.componentName = m.prop('Landing');
+  }
+
+  onMount(element, isInit) {
+    if (!isInit) {
+      trackPageView();
+    }
   }
 
   view() {
@@ -28,7 +37,7 @@ class Landing extends MithrilComponent {
     const Footer = new _Footer();
 
     return (
-      <div className="Landing">
+      <div className="Landing" config={this.onMount}>
         <Header />
         <Advantages />
         <People />

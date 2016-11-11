@@ -1,0 +1,51 @@
+@require '../../../../styles/base/util'
+@require '../../../../styles/base/devices'
+
+$componentName = 'Thanks'
+
+.{$componentName}
+  height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  font-size: 1rem
+  font-family: $font-dincyr-regular
+  background: $color-peach
+
+  &__header
+    width: 100%
+    text-align: center
+    background: $color-dark-gray
+
+  &__logo
+    height: 15em
+    padding: 5em
+
+  &__titles
+    text-align: center
+    margin-top: 5em
+
+  &__title
+    font-family: $font-dincyr-bold
+    font-size: 5em
+    margin-bottom: 0.6em
+    color: $color-granate
+
+  &__subtitle
+    font-size: 2.6em
+
+  &__link-back
+    margin-top: 1.6em
+    font-size: 2.6em
+    color: $color-granate
+
+@media $mobile
+  .{$componentName}
+    &__logo
+      height: 12em
+    &__titles
+      font-size: 0.8em
+    &__link-back
+      margin-bottom: 1.4em
+      font-size: 2em

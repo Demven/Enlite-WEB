@@ -1,7 +1,9 @@
+import passwordGenerator from 'random-password-generator';
 import {
   findById,
   findByLogin,
   findByEmail,
+  findAll,
   register,
   auth,
   resetPassword,
@@ -9,6 +11,7 @@ import {
   updateData,
   getData,
 } from '../db/model/user';
+import { sendEmailAboutPassReset } from '../services/elasticemail';
 
 const API_KEY = '715be005-cc41-4d6b-a85f-46056c2f8629';
 
@@ -98,6 +101,32 @@ export default function addAPIv1(app) {
     }
   });
 
+  app.post('/api/v1/findall', (req, res) => {
+    const { apikey } = req.body;
+
+    if (apikey && apikey === API_KEY) {
+      findAll()
+        .then(
+          (users) => {
+            res.json({
+              users,
+              error: null,
+            });
+          },
+          (error) => {
+            res.json({
+              success: false,
+              error: {
+                name: error.name,
+                msg: error.msg,
+              },
+            });
+          });
+    } else {
+      res.status(401).end();
+    }
+  });
+
   app.post('/api/v1/register', (req, res) => {
     const {
       apikey,
@@ -171,7 +200,8 @@ export default function addAPIv1(app) {
     } = req.body;
 
     if (apikey && apikey === API_KEY) {
-      resetPassword(email)
+      const newPassword = passwordGenerator.generate();
+      resetPassword(email, newPassword)
         .then(
           (success) => {
             res.json({
@@ -179,7 +209,7 @@ export default function addAPIv1(app) {
               error: null,
             });
 
-            // TODO: if (success) { send email to the user with new password and link to a page to change password}
+            sendEmailAboutPassReset(email, newPassword);
           },
           (error) => {
             res.json({
