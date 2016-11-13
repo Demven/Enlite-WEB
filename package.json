@@ -3,13 +3,9 @@
   "version": "2.2.1",
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
-    "postinstall": "npm i -g npm@4 && gulp",
+    "postinstall": "gulp",
     "start": "node build/server/server.js",
     "start-dev": "NODE_ENV=development node build/server/server.js"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": "= 6.9.0"
   },
   "main": "node build/server/server.js",
   "author": "Dmitry Salnikov dmitry_salnikov@protonmail.com",
