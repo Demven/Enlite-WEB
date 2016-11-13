@@ -1,6 +1,6 @@
 {
   "name": "Enlite-WEB",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
     "postinstall": "gulp",
