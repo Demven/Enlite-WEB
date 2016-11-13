@@ -1,7 +1,8 @@
 language: node_js
 
 before_install:
-  - if [[ `npm -v` != 4* ]]; then npm i -g npm@4; fi
+  - npm i -g npm@4
+  - npm --version
 
 node_js:
   - "7.1.0"
