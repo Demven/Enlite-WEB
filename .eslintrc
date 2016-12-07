@@ -19,6 +19,7 @@
     "no-unexpected-multiline": 2,
     "no-underscore-dangle": 0,
     "react/react-in-jsx-scope": 0,
+    "react/jsx-filename-extension": 0,
     "react/no-unknown-property": 0,
     "arrow-body-style": 1,
     "prefer-template": 0,

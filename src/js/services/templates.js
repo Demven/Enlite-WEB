@@ -23,3 +23,10 @@ const changePasswordHtml = fs.readFileSync(changePasswordHtmlFilePath, 'utf8');
 export function changePasswordHtmlTemplater(renderPlaceholder, mainContent) {
   return changePasswordHtml.replace(renderPlaceholder, mainContent);
 }
+
+const termsAndPolicyHtmlFilePath = path.join(__dirname, '../../../build/html', 'terms-and-policy.html');
+const termsAndPolicyHtml = fs.readFileSync(termsAndPolicyHtmlFilePath, 'utf8');
+
+export function termsAndPolicyHtmlTemplater(renderPlaceholder, mainContent) {
+  return termsAndPolicyHtml.replace(renderPlaceholder, mainContent);
+}
