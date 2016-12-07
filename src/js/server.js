@@ -4,16 +4,22 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import render from 'mithril-node-render';
+import validator from 'validator';
 import mithrilRoutes from './routes';
 import ThanksPage from './components/pages/Thanks/Thanks';
 import ChangePasswordPage from './components/pages/change-password/ChangePassword/ChangePassword';
+import TermsAndPolicyPage from './components/pages/TermsAndPolicy/TermsAndPolicy';
 // import authenticate from './middleware/auth';
-import { indexHtmlTemplater, confirmationHtmlTemplater, changePasswordHtmlTemplater } from './services/templates';
+import {
+  indexHtmlTemplater,
+  confirmationHtmlTemplater,
+  changePasswordHtmlTemplater,
+  termsAndPolicyHtmlTemplater,
+} from './services/templates';
 import { confirmEmail } from './services/elasticemail';
 import { connectMongo } from './db/mongo';
 import addAPIv1 from './api/v1';
 import addClientAPI from './api/clientAPI';
-import validator from 'validator';
 
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
@@ -31,6 +37,10 @@ app.use(cookieParser());
 app.use(compression());
 
 /* PAGES */
+app.get('/terms-and-policy', (req, res) => {
+  res.type('html');
+  res.end(termsAndPolicyHtmlTemplater(mithrilRenderPlaceholder, render(new TermsAndPolicyPage())));
+});
 app.get('/change-password/:email', (req, res) => {
   const email = req.params.email;
 
