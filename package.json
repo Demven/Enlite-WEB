@@ -4,12 +4,16 @@
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
     "postinstall": "gulp",
-    "start": "node build/server/server.js",
+    "start": "NODE_ENV=production node build/server/server.js",
     "start-dev": "NODE_ENV=development node build/server/server.js"
   },
   "main": "node build/server/server.js",
   "author": "Dmitry Salnikov dmitry_salnikov@protonmail.com",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Demven/Enlite-WEB"
+  },
   "dependencies": {
     "babel-plugin-mjsx": "4.1.1",
     "babel-preset-es2015": "6.18.0",
