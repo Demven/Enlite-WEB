@@ -17,7 +17,7 @@ import {
   termsAndPolicyHtmlTemplater,
 } from './services/templates';
 import { confirmEmail } from './services/elasticemail';
-import { connectMongo } from './db/mongo';
+import connectMongo from './db/mongo';
 import addAPIv1 from './api/v1';
 import addClientAPI from './api/clientAPI';
 

@@ -3,20 +3,29 @@ import Promise from 'bluebird';
 
 mongoose.Promise = Promise;
 
-export function connectMongo() {
+export default function connectMongo() {
+  const options = {
+    useMongoClient: true,
+    promiseLibrary: Promise,
+  };
+  let connectionURI;
   if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-    const connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ':' +
+    connectionURI = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ':' +
       process.env.OPENSHIFT_MONGODB_DB_PASSWORD + '@' +
       process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
       process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
       process.env.OPENSHIFT_APP_NAME;
-
-    global.console.info('connectionString: ' + connectionString);
-
-    mongoose.connect(connectionString);
   } else {
-    mongoose.connect('mongodb://localhost/prod');
+    connectionURI = 'mongodb://localhost/prod';
   }
 
-  global.console.info('Connect to the database.');
+  console.info('connectionString: ' + connectionURI);
+
+  mongoose.connect(connectionURI, options, (error) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.info('Connected to the database.');
+    }
+  });
 }
