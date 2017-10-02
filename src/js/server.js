@@ -21,6 +21,8 @@ import connectMongo from './db/mongo';
 import addAPIv1 from './api/v1';
 import addClientAPI from './api/clientAPI';
 
+console.log('SERVER SCRIPT');
+
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
 connectMongo();
