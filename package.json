@@ -3,8 +3,9 @@
   "version": "2.2.3",
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
-    "postinstall": "gulp",
-    "start": "NODE_ENV=production node build/server/server.js",
+    "postinstall": "echo '---> POSTINSTALL <---'",
+    "build": "gulp",
+    "start": "npm run build && NODE_ENV=production node build/server/server.js",
     "start-dev": "NODE_ENV=development node build/server/server.js"
   },
   "main": "node build/server/server.js",
