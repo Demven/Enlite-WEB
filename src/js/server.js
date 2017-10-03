@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 // import path from 'path';
 import bodyParser from 'body-parser';
@@ -21,16 +24,13 @@ import connectMongo from './db/mongo';
 import addAPIv1 from './api/v1';
 import addClientAPI from './api/clientAPI';
 
-console.log('SERVER SCRIPT');
+dotenv.config();
 
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
-connectMongo();
+// connectMongo();
 
 const app = express();
-
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 4000);
-app.set('ip-address', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 
 app.use(express.static('build'));
 app.use(bodyParser.json());
@@ -83,6 +83,7 @@ addClientAPI(app);
 //    res.sendFile(path.join(__dirname, '../../build/html', 'index.html'));
 // });
 
-app.listen(app.get('port'), app.get('ip-address'), () => {
-  global.console.info(`Server started on ${app.get('ip-address')}: ${app.get('port')}`);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  global.console.info(`Server started on port: ${PORT}`);
 });

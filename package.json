@@ -3,10 +3,8 @@
   "version": "2.2.3",
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
-    "postinstall": "echo '---> POSTINSTALL <---'",
-    "build": "gulp",
-    "start": "npm run build && NODE_ENV=production node build/server/server.js",
-    "start-dev": "NODE_ENV=development node build/server/server.js"
+    "start": "NODE_ENV=production gulp && NODE_ENV=production node build/server/server.js",
+    "start-dev": "NODE_ENV=development gulp && NODE_ENV=development node build/server/server.js"
   },
   "main": "node build/server/server.js",
   "author": "Dmitry Salnikov dmitry_salnikov@protonmail.com",
@@ -27,6 +25,7 @@
     "compression": "1.6.2",
     "cookie-parser": "1.4.3",
     "del": "2.2.2",
+    "dotenv": "4.0.0",
     "express": "4.14.0",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
@@ -54,11 +53,11 @@
     "vinyl-source-stream": "1.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "7.1.0",
-    "eslint": "3.10.0",
-    "eslint-config-airbnb": "13.0.0",
-    "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jsx-a11y": "2.2.3",
-    "eslint-plugin-react": "6.6.0"
+    "babel-eslint": "8.0.1",
+    "eslint": "4.8.0",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0"
   }
 }

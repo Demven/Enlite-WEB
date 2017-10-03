@@ -22,6 +22,7 @@
     "react/jsx-filename-extension": 0,
     "react/no-unknown-property": 0,
     "arrow-body-style": 1,
-    "prefer-template": 0,
+    "arrow-parens": "off",
+    "prefer-template": 0
   }
 }

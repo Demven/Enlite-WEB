@@ -1,55 +1,50 @@
-var gulp = require('gulp');
-var del = require('del');
-var source = require('vinyl-source-stream');
-var babel = require('gulp-babel');
-var htmlMin = require('gulp-htmlmin');
-var babelify = require('babelify');
-var browserify = require('browserify');
-var runSequence = require('run-sequence').use(gulp);
-var stylus = require('gulp-stylus');
-var autoprefixer = require('gulp-autoprefixer');
-var concatCss = require('gulp-concat-css');
-var cssmin = require('gulp-cssmin');
-var rev = require('gulp-rev');
-var revReplace = require('gulp-rev-replace');
-var gzip = require('gulp-gzip');
-var uglify = require('gulp-uglify');
-var pump = require('pump');
-
-/* TRAVIS TASKS */
-gulp.task('travis:remove:gitignore', function (cb) {
-  return del(['.gitignore'], cb);
-});
+const gulp = require('gulp');
+const del = require('del');
+const source = require('vinyl-source-stream');
+const babel = require('gulp-babel');
+const htmlMin = require('gulp-htmlmin');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const runSequence = require('run-sequence').use(gulp);
+const stylus = require('gulp-stylus');
+const autoprefixer = require('gulp-autoprefixer');
+const concatCss = require('gulp-concat-css');
+const cssmin = require('gulp-cssmin');
+const rev = require('gulp-rev');
+const revReplace = require('gulp-rev-replace');
+const gzip = require('gulp-gzip');
+const uglify = require('gulp-uglify');
+const pump = require('pump');
 
 /* CLEAN TASKS */
-gulp.task('clean:css', function (cb) {
+gulp.task('clean:css', cb => {
   return del(['build/css'], cb);
 });
-gulp.task('clean:js', function (cb) {
+gulp.task('clean:js', cb => {
   return del(['build/client', 'build/server'], cb);
 });
-gulp.task('clean:html', function (cb) {
+gulp.task('clean:html', cb => {
   return del(['build/html'], cb);
 });
-gulp.task('clean', function (cb) {
+gulp.task('clean', cb => {
   return del(['build'], cb);
 });
 
 /* BUILD TASKS */
 // images
-gulp.task('build:images', function () {
+gulp.task('build:images', () => {
   return gulp.src('src/images/**')
     .pipe(gulp.dest('build/images'));
 });
 
 // fonts
-gulp.task('build:fonts', function () {
+gulp.task('build:fonts', () => {
   return gulp.src('src/fonts/**')
     .pipe(gulp.dest('build/fonts'));
 });
 
 // html
-gulp.task('build:html', function () {
+gulp.task('build:html', () => {
   return gulp.src(['src/html/**'])
     .pipe(htmlMin({
       collapseWhitespace: true,
@@ -59,7 +54,7 @@ gulp.task('build:html', function () {
 });
 
 // css
-gulp.task('build:css', function () {
+gulp.task('build:css', () => {
   return gulp.src('src/styles/index.styl')
     .pipe(stylus({
       compress: true,
@@ -70,14 +65,14 @@ gulp.task('build:css', function () {
 });
 
 // js
-gulp.task('build:client:js', function () {
+gulp.task('build:client:js', () => {
   return browserify(['./src/js/client.js'], {debug: true})
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('build/client'));
 });
-gulp.task('build:server:js', function() {
+gulp.task('build:server:js', () => {
   return gulp.src('./src/js/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('build/server/'));
@@ -86,7 +81,7 @@ gulp.task('build:server:js', function() {
 
 /* MINIFICATION */
 // css
-gulp.task('min:css', function(cb) {
+gulp.task('min:css', cb => {
   pump([
     gulp.src('build/css/bundle.css'),
     cssmin(),
@@ -94,7 +89,7 @@ gulp.task('min:css', function(cb) {
   ], cb);
 });
 // client js
-gulp.task('min:client:js', function(cb) {
+gulp.task('min:client:js', cb => {
   pump([
     gulp.src('build/client/bundle.js'),
     uglify(),
@@ -102,113 +97,113 @@ gulp.task('min:client:js', function(cb) {
   ], cb);
 });
 // main
-gulp.task('min', function (callback) {
+gulp.task('min', cb => {
   if (process.env.NODE_ENV === 'production') {
-    runSequence('min:css', 'min:client:js', callback);
+    runSequence('min:css', 'min:client:js', cb);
   } else {
     // skip minification
-    callback();
+    cb();
   }
 });
 
 /* REVISIONS */
 // css
-gulp.task('rev:css:manifest', function () {
+gulp.task('rev:css:manifest', () => {
   return gulp.src(['build/css/bundle.css'], {base: 'build'})
     .pipe(rev())
     .pipe(gulp.dest('build/'))
     .pipe(rev.manifest())
     .pipe(gulp.dest('build/css'));
 });
-gulp.task('rev:css:replace', function () {
-  var manifest = gulp.src('build/css/rev-manifest.json');
+gulp.task('rev:css:replace', () => {
+  const manifest = gulp.src('build/css/rev-manifest.json');
 
   return gulp.src('build/html/index.html')
-    .pipe(revReplace({manifest: manifest}))
+    .pipe(revReplace({ manifest }))
     .pipe(gulp.dest('build/html'));
 });
 
 // js
-gulp.task('rev:js:manifest', function () {
+gulp.task('rev:js:manifest', () => {
   return gulp.src(['build/client/bundle.js'], {base: 'build'})
     .pipe(rev())
     .pipe(gulp.dest('build/'))
     .pipe(rev.manifest())
     .pipe(gulp.dest('build/client'));
 });
-gulp.task('rev:js:replace', function () {
-  var manifest = gulp.src('build/client/rev-manifest.json');
+gulp.task('rev:js:replace', () => {
+  const manifest = gulp.src('build/client/rev-manifest.json');
 
   return gulp.src('build/html/index.html')
-    .pipe(revReplace({ manifest: manifest }))
+    .pipe(revReplace({ manifest }))
     .pipe(gulp.dest('build/html'));
 });
 
 // main
-gulp.task('rev', function (callback) {
-  runSequence('rev:css:manifest', 'rev:css:replace', 'rev:js:manifest', 'rev:js:replace', callback);
+gulp.task('rev', cb => {
+  runSequence('rev:css:manifest', 'rev:css:replace', 'rev:js:manifest', 'rev:js:replace', cb);
 });
 
 
 /* GZIP */
 // css
-gulp.task('gzip:css', function () {
+gulp.task('gzip:css', () => {
   return gulp.src('build/css/bundle-*.css')
     .pipe(gzip())
     .pipe(gulp.dest('build/css'));
 });
 // js
-gulp.task('gzip:js', function () {
+gulp.task('gzip:js', () => {
   return gulp.src('build/js/bundle-*.js')
     .pipe(gzip())
     .pipe(gulp.dest('build/js'));
 });
 // main
-gulp.task('gzip', function (callback) {
-  runSequence('gzip:css', 'gzip:js', callback);
+gulp.task('gzip', cb => {
+  runSequence('gzip:css', 'gzip:js', cb);
 });
 
 /* WATCH */
-gulp.task('watch', function () {
+gulp.task('watch', () => {
   // css
-  gulp.watch('src/styles/**', function () {
+  gulp.watch('src/styles/**', () => {
     runSequence('clean:css', 'clean:html', 'build:html', 'build:css', 'rev:css:manifest', 'rev:css:replace', 'gzip:css');
   });
-  gulp.watch('src/js/components/**/*.styl', function () {
+  gulp.watch('src/js/components/**/*.styl', () => {
     runSequence('clean:css', 'clean:html', 'build:html', 'build:css', 'rev:css:manifest', 'rev:css:replace', 'gzip:css');
   });
 
   // js
-  gulp.watch('src/js/**/*.js', function () {
+  gulp.watch('src/js/**/*.js', () => {
     runSequence('clean:js', 'clean:html', 'build:html', 'build:client:js', 'build:server:js', 'rev:js:manifest', 'rev:js:replace', 'gzip:js');
   });
 
   // images
-  gulp.watch('src/images/**', function () {
+  gulp.watch('src/images/**', () => {
     runSequence('build:images');
   });
 });
 
 
 /* MAIN TASKS */
-gulp.task('build', function (callback) {
-  runSequence('build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'min', 'rev', 'gzip', callback);
+gulp.task('build', cb => {
+  runSequence('build:images', 'build:fonts', 'build:html', 'build:css', 'build:client:js', 'build:server:js', 'min', 'rev', 'gzip', cb);
 });
 
-gulp.task('dev-watch', function (callback) {
-  runSequence('clean', 'build', 'watch', callback);
+gulp.task('dev-watch', cb => {
+  runSequence('clean', 'build', 'watch', cb);
 });
 
-gulp.task('production', function (callback) {
-  runSequence('clean', 'build', 'travis:remove:gitignore', callback);
+gulp.task('production', cb => {
+  runSequence('clean', 'build', cb);
 });
 
-gulp.task('default', function (callback) {
+gulp.task('default', cb => {
   if (process.env.NODE_ENV === 'production') {
     // production sequence
-    runSequence('clean', 'build', 'travis:remove:gitignore', callback);
+    runSequence('clean', 'build', cb);
   } else {
     // development sequence
-    runSequence('clean', 'build', callback);
+    runSequence('clean', 'build', cb);
   }
 });

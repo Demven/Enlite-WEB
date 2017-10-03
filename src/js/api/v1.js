@@ -13,8 +13,6 @@ import {
 } from '../db/model/user';
 import { sendEmailAboutPassReset } from '../services/elasticemail';
 
-const API_KEY = '715be005-cc41-4d6b-a85f-46056c2f8629';
-
 function addCORSheaders(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -32,7 +30,7 @@ export default function addAPIv1(app) {
       email,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       if (userId) {
         findById(userId)
           .then(
@@ -104,7 +102,7 @@ export default function addAPIv1(app) {
   app.post('/api/v1/findall', (req, res) => {
     const { apikey } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       findAll()
         .then(
           (users) => {
@@ -135,7 +133,7 @@ export default function addAPIv1(app) {
       pass,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       register(email, login, pass)
         .then(
           (newUser) => {
@@ -168,7 +166,7 @@ export default function addAPIv1(app) {
       pass,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       auth(login, pass)
         .then(
           (user) => {
@@ -199,7 +197,7 @@ export default function addAPIv1(app) {
       email,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       const newPassword = passwordGenerator.generate();
       resetPassword(email, newPassword)
         .then(
@@ -233,7 +231,7 @@ export default function addAPIv1(app) {
       newPass,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       changePassword(userId, oldPass, newPass)
         .then(
           (success) => {
@@ -263,7 +261,7 @@ export default function addAPIv1(app) {
       data,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       updateData(userId, data)
         .then(
           (success) => {
@@ -292,7 +290,7 @@ export default function addAPIv1(app) {
       userId,
     } = req.body;
 
-    if (apikey && apikey === API_KEY) {
+    if (apikey && apikey === process.env.API_KEY) {
       getData(userId)
         .then(
           (data) => {
