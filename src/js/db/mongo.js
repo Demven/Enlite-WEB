@@ -8,20 +8,8 @@ export default function connectMongo() {
     useMongoClient: true,
     promiseLibrary: Promise,
   };
-  let connectionURI;
-  if (process.env.NODE_ENV === 'production') {
-    connectionURI = process.env.MONGODB_USERNAME + ':' +
-      process.env.MONGODB_PASSWORD + '@' +
-      process.env.MONGODB_HOST + ':' +
-      process.env.MONGODB_PORT + '/' +
-      process.env.MONGODB_DATABASE_NAME;
-  } else {
-    connectionURI = 'mongodb://localhost/prod';
-  }
 
-  global.console.log('connectionString: ' + connectionURI);
-
-  mongoose.connect(connectionURI, options, (error) => {
+  mongoose.connect(process.env.MONGODB_URI, options, (error) => {
     if (error) {
       global.console.error(error);
     } else {

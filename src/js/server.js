@@ -28,7 +28,7 @@ dotenv.config();
 
 const mithrilRenderPlaceholder = '<!-- mithril-server-render-placeholder -->';
 
-// connectMongo();
+connectMongo();
 
 const app = express();
 
