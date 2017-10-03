@@ -1,6 +1,6 @@
 {
   "name": "Enlite-WEB",
-  "version": "2.2.3",
+  "version": "2.4.0",
   "description": "Enlite app is a mobile application that teach your fast-reading technics.",
   "scripts": {
     "start": "NODE_ENV=production gulp && NODE_ENV=production node build/server/server.js",
