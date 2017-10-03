@@ -37,7 +37,7 @@ class TermsAndPolicy extends MithrilComponent {
           <p>1.1</p>
           <p>OOO “Integral”, Khimki, ul. Akademika Grushina, 33, Russian Federation (thereafter
           “Enlite”) operates a platform for mobile reading on the internet portal
-          http://www.enlited.ru and other websites as well as via mobile applications - so called
+            http://www.enliteyourmind.com/ and other websites as well as via mobile applications - so called
           “Apps” - (thereafter platform). Within this scope, Enlite teaches to read faster and
           effectively comprehend any type of text.</p>
 
@@ -223,7 +223,7 @@ class TermsAndPolicy extends MithrilComponent {
           <h5>1. Introduction</h5>
           <p>OOO “Integral”, Khimki, ul. Akademika Grushina, 33, Russian Federation (thereafter
           “Enlite” or “we”) operates a platform for mobile reading on the internet portal
-          http://www.enlited.ru as well as via mobile applications - so-called “Apps” - (thereafter
+            http://www.enliteyourmind.com as well as via mobile applications - so-called “Apps” - (thereafter
             platform).</p>
           <p>We are happy that you are interested in Enlite. For providing you with our service, we
           will need certain information about you. This data protection notification elaborates
